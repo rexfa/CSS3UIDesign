@@ -2,7 +2,10 @@ body {
     background: #333333;
 }
 
-.workspace div {}
+.workspace div {
+    transition: width 2s, height 2s, transform 2s;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+}
 
 .taskpanel {
     border: 2px solid #ff8c00;
