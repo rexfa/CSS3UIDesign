@@ -7,8 +7,8 @@
     color: var(--color-subtle);
     border-right: 1px solid var(--color-border);
     background-color: var(--color-bg);
-    /*visibility: hidden;
-    opacity: 0;*/
+    visibility: hidden;
+    opacity: 0;
   }
   .nav.is-shown {
     visibility: visible;;
