@@ -10,10 +10,11 @@
         </h1>
         <h3>自动加载 <code>源数据</code> 请根据需求开始运行任务。</h3>
       </div>
+      <button id="jobs-test" onclick="jobsTest()">测试</button>
     </header>
     <div class="workspace">
       <div class="workspace-wrapper">
-
+          <link rel="jobs" href="sections/jobs/jobs-Info.html">
           <div class="taskpanel" id="taskpanelDSAFAEWE34521DS">
             任务:DSAFAEWE34521DS<br />
             操作：用户定制A<br />
@@ -55,9 +56,12 @@
 
           </div>
         </div>
-
+        <div class="jobspanel"></div>
         <script type="text/javascript">
           require('./renderer-process/jobs/jobs')
+          function jobsTest(){
+            
+          }
         </script>
 
   </section>
