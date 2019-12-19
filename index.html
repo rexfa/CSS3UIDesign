@@ -57,8 +57,7 @@
                 </svg> 历史结果
             </h5>
             <button type="button" id="button-menus" data-section="menus" class="nav-button">查看 <em>任务结果</em> </button>
-            <button type="button" id="button-shortcuts" data-section="shortcuts"
-                class="nav-button">查看<em>任务日志</em></button>
+            <button type="button" id="button-shortcuts" data-section="shortcuts" class="nav-button">查看<em>任务日志</em></button>
         </div>
         <div class="nav-item u-category-communication">
             <h5 class="nav-category">
@@ -75,8 +74,7 @@
                     <use xlink:href="assets/img/icons.svg#icon-system"></use>
                 </svg> 系统
             </h5>
-            <button type="button" id="button-app-sys-information" data-section="app-sys-information"
-                class="nav-button">显示 <em>系统信息</em></button>
+            <button type="button" id="button-app-sys-information" data-section="app-sys-information" class="nav-button">显示 <em>系统信息</em></button>
             <button type="button" id="button-clipboard" data-section="clipboard" class="nav-button">平台
                 <em>设置</em></button>
         </div>
@@ -102,7 +100,8 @@
         require('./assets/normalize-shortcuts')
 
         function jobsTest() {
-            importJobInfoTemplate()
+            let ramboName = (+new Date).toString(36)
+            addJobInfoPanel(ramboName)
         }
         //引用模板
         function importJobInfoTemplate() {
@@ -113,11 +112,30 @@
             workspace[0].appendChild(clone)
         }
 
+        function addJobInfoPanel(jobName) {
+            let template = document.getElementsByClassName("jobstemplate")
+            let clone = template[0].children[0].cloneNode(true)
+            clone.setAttribute("id", "taskpanel" + jobName)
+            setCloneDomContent(clone, "task-name", jobName)
+            let btnOperation = clone.getElementsByClassName("job-operation")[0]
+            btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')")
+            let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0]
+            controlpanel.setAttribute("id", "controlpanel" + jobName)
+            document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone)
+        }
+
+        function setCloneDomContent(cloneNode, className, content) {
+            let target = cloneNode.getElementsByClassName(className)[0]
+            let dom = document.createElement('div');
+            dom.innerHTML = content;
+            target.appendChild(dom)
+        }
+
         function setTTTime(jobInfoNode) {
             let tt = jobInfoNode.getElementsByClassName("task-runtime")[0]
-            let dom=document.createElement('p');
+            let dom = document.createElement('p');
             //dom.className='book';
-            dom.innerHTML=CurentTime();
+            dom.innerHTML = CurentTime();
             tt.appendChild(dom)
         }
 
@@ -142,6 +160,20 @@
             if (mm < 10) clock += '0';
             clock += mm;
             return (clock);
+        }
+        /* 添加动画用 */
+        function operationonclick(taskname) {
+            var controlpanelID = "controlpanel" + taskname;
+            var controlpanel = document.getElementById(controlpanelID);
+            var taskpanelID = "taskpanel" + taskname
+            var taskpanel = document.getElementById(taskpanelID);
+            if (controlpanel.className == "controlpanel-hidden") {
+                taskpanel.style.height = 350;
+                controlpanel.className = "controlpanel-display";
+            } else {
+                controlpanel.className = "controlpanel-hidden";
+                taskpanel.style.height = 200;
+            }
         }
     </script>
 </body>
