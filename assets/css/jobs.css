@@ -66,3 +66,7 @@
 .controlpanel-display {
     display: inline;
 }
+.jobstemplate{
+    visibility: hidden;
+    opacity: 0;
+}

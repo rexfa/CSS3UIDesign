@@ -27,49 +27,66 @@
     <link rel="import" href="sections/system/clipboard.html">
     <link rel="import" href="sections/system/protocol-handler.html">
     <link rel="import" href="sections/media/desktop-capturer.html">
+
 </head>
 
 <body>
     <nav class="nav js-nav">
         <header class="nav-header">
             <h1 class="nav-title">UI <strong>Design</strong></h1>
-            <svg class="nav-header-icon"><use xlink:href="assets/img/icons.svg#icon-electron"></use></svg>
+            <svg class="nav-header-icon">
+                <use xlink:href="assets/img/icons.svg#icon-electron"></use>
+            </svg>
         </header>
 
         <div class="nav-item u-category-jobs">
             <h5 class="nav-category">
-                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg> 任务
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-windows"></use>
+                </svg> 任务
             </h5>
             <button type="button" id="button-jobs" data-section="jobs" class="nav-button">任务 <em>列表</em></button>
-            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">平台运行 <em>状态</em></button>
+            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">平台运行
+                <em>状态</em></button>
         </div>
 
         <div class="nav-item u-category-menu">
             <h5 class="nav-category">
-                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg> 历史结果
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-menu"></use>
+                </svg> 历史结果
             </h5>
             <button type="button" id="button-menus" data-section="menus" class="nav-button">查看 <em>任务结果</em> </button>
-            <button type="button" id="button-shortcuts" data-section="shortcuts" class="nav-button">查看<em>任务日志</em></button>
+            <button type="button" id="button-shortcuts" data-section="shortcuts"
+                class="nav-button">查看<em>任务日志</em></button>
         </div>
         <div class="nav-item u-category-communication">
             <h5 class="nav-category">
-                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg> 通信
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-communication"></use>
+                </svg> 通信
             </h5>
             <button type="button" id="button-ipc" data-section="ipc" class="nav-button">申请<em>服务</em></button>
         </div>
 
         <div class="nav-item u-category-system">
             <h5 class="nav-category">
-                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg> 系统
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-system"></use>
+                </svg> 系统
             </h5>
-            <button type="button" id="button-app-sys-information" data-section="app-sys-information" class="nav-button">显示 <em>系统信息</em></button>
-            <button type="button" id="button-clipboard" data-section="clipboard" class="nav-button">平台 <em>设置</em></button>
+            <button type="button" id="button-app-sys-information" data-section="app-sys-information"
+                class="nav-button">显示 <em>系统信息</em></button>
+            <button type="button" id="button-clipboard" data-section="clipboard" class="nav-button">平台
+                <em>设置</em></button>
         </div>
 
         <footer class="nav-footer">
             <button type="button" id="button-about" data-modal="about" class="nav-footer-button">About</button>
             <a class="nav-footer-logo" href="https://github.com" aria-label="Homepage">
-                <svg class="nav-footer-icon"><use xlink:href="assets/img/icons.svg#icon-love"></use></svg>
+                <svg class="nav-footer-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-love"></use>
+                </svg>
             </a>
         </footer>
     </nav>
@@ -83,6 +100,49 @@
         require('./assets/demo-btns')
         require('./assets/code-blocks')
         require('./assets/normalize-shortcuts')
+
+        function jobsTest() {
+            importJobInfoTemplate()
+        }
+        //引用模板
+        function importJobInfoTemplate() {
+            let template = document.getElementsByClassName("jobstemplate")
+            let clone = template[0].children[0].cloneNode(true)
+            setTTTime(clone)
+            let workspace = document.getElementsByClassName('workspace-wrapper')
+            workspace[0].appendChild(clone)
+        }
+
+        function setTTTime(jobInfoNode) {
+            let tt = jobInfoNode.getElementsByClassName("task-runtime")[0]
+            let dom=document.createElement('p');
+            //dom.className='book';
+            dom.innerHTML=CurentTime();
+            tt.appendChild(dom)
+        }
+
+        function CurentTime() {
+            var now = new Date();
+            var year = now.getFullYear(); //年
+            var month = now.getMonth() + 1; //月
+            var day = now.getDate(); //日
+            var hh = now.getHours(); //时
+            var mm = now.getMinutes(); //分
+
+            var clock = year + "-";
+            if (month < 10)
+                clock += "0";
+            clock += month + "-";
+            if (day < 10)
+                clock += "0";
+            clock += day + " ";
+            if (hh < 10)
+                clock += "0";
+            clock += hh + ":";
+            if (mm < 10) clock += '0';
+            clock += mm;
+            return (clock);
+        }
     </script>
 </body>
 
