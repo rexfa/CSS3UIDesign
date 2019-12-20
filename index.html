@@ -15,6 +15,7 @@
 
     <link rel="import" href="sections/about.html">
     <link rel="import" href="sections/jobs/jobs.html">
+    <link rel="import" href="sections/jobs/jobs-status.html">
     <link rel="import" href="sections/menus/menus.html">
     <link rel="import" href="sections/menus/shortcuts.html">
     <link rel="import" href="sections/native-ui/ex-links-file-manager.html">
@@ -46,7 +47,7 @@
                 </svg> 任务
             </h5>
             <button type="button" id="button-jobs" data-section="jobs" class="nav-button">任务 <em>列表</em></button>
-            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">平台运行
+            <button type="button" id="button-jobs-status" data-section="jobs-status" class="nav-button">平台运行
                 <em>状态</em></button>
         </div>
 
@@ -80,8 +81,8 @@
         </div>
 
         <footer class="nav-footer">
-            <button type="button" id="button-about" data-modal="about" class="nav-footer-button">About</button>
-            <a class="nav-footer-logo" href="https://github.com" aria-label="Homepage">
+            <button type="button" id="button-about" data-modal="about" class="nav-footer-button">关于</button>
+            <a class="nav-footer-logo" href="https://www.rexfa.cc" aria-label="作者主页">
                 <svg class="nav-footer-icon">
                     <use xlink:href="assets/img/icons.svg#icon-love"></use>
                 </svg>
@@ -116,24 +117,37 @@
             let template = document.getElementsByClassName("jobstemplate")
             let clone = template[0].children[0].cloneNode(true)
             clone.setAttribute("id", "taskpanel" + jobName)
-            setCloneDomContent(clone, "task-name", jobName)
+            setCloneDomContent(clone, "task-name","tasknamm"+jobName ,jobName)
+            setCloneDomContent(clone, "task-operation","taskoperation"+jobName ,"准备完毕")
+            setCloneDomContent(clone, "task-status","taskstatus"+jobName ,"准备")
+            setCloneDomContent(clone, "task-scale","taskscale"+jobName ,"10G")
             let btnOperation = clone.getElementsByClassName("job-operation")[0]
             btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')")
             let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0]
             controlpanel.setAttribute("id", "controlpanel" + jobName)
+            setITTime(clone)
+            setTTTime(clone)
             document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone)
         }
 
-        function setCloneDomContent(cloneNode, className, content) {
+        function setCloneDomContent(cloneNode, className,domId, content) {
             let target = cloneNode.getElementsByClassName(className)[0]
-            let dom = document.createElement('div');
+            let dom = document.createElement('em');
             dom.innerHTML = content;
+            dom.id=domId
             target.appendChild(dom)
         }
 
         function setTTTime(jobInfoNode) {
             let tt = jobInfoNode.getElementsByClassName("task-runtime")[0]
-            let dom = document.createElement('p');
+            let dom = document.createElement('em');
+            //dom.className='book';
+            dom.innerHTML = CurentTime();
+            tt.appendChild(dom)
+        }
+        function setITTime(jobInfoNode) {
+            let tt = jobInfoNode.getElementsByClassName("task-inputtime")[0]
+            let dom = document.createElement('em');
             //dom.className='book';
             dom.innerHTML = CurentTime();
             tt.appendChild(dom)

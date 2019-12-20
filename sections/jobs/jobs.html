@@ -8,18 +8,23 @@
           </svg>
           任务
         </h1>
-        <h3>自动加载 <code>源数据</code> 请根据需求开始运行任务。</h3>
+        <h3>自动加载 <code>源数据</code> 请根据需求开始运行任务</h3>
       </div>
-      <button id="jobs-test" onclick="jobsTest()">测试</button>
+
     </header>
+    <div class="workspace">
+      <div id="jobsPanel" class="workspace-wrapper">
+
+      </div>
+    </div>
     <div class="jobstemplate">
       <div class="taskpanel" id="taskpanelTTTTT">
-        任务:<em class="task-name"></em><br />
-        操作：<em class="task-operation"></em><br />
-        状态：<em class="task-status"></em><br />
-        数据规模：<em class="task-scale"></em><br />
-        IT：<em class="task-inputtime"></em><br />
-        TT：<em class="task-runtime"></em>
+        <div>任务:<em class="task-name"></em></div>
+        <div>操作：<em class="task-operation"></em></div>
+        <div>状态：<em class="task-status"></em></div>
+        <div>数据规模：<em class="task-scale"></em></div>
+        <div>IT：<em class="task-inputtime"></em></div>
+        <div>TT：<em class="task-runtime"></em></div>
         <hr />
         <div class="controlpanel">
           <button class="job-operation">
@@ -34,52 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="workspace">
-      <div id="jobsPanel" class="workspace-wrapper">
-        <div class="taskpanel" id="taskpanelDSAFAEWE34521DS">
-          任务:DSAFAEWE34521DS<br />
-          操作：用户定制A<br />
-          状态：运行中 | 89%<br />
-          数据规模：12302M<br />
-          IT：2019.11.1 15:23:30<br />
-          TT：2019.11.1 16:10:31
-          <hr>
-          <div class="controlpanel">
-            <button id="operation" onclick="operationonclick('DSAFAEWE34521DS')">操作</button><br />
-            <div class="controlpanel-hidden" id="controlpanelDSAFAEWE34521DS">
-              <button id="selecttasksctript">选择任务脚本</button><br />
-              <button id="prioritystart">优先开始</button><br />
-              <button id="deferredtask">延期任务</button><br />
-              <button id="pausetask">暂停任务</button><br />
-              <div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="taskpanel" id="taskpanelDSAFAEWE3453F21">
-          任务:DSAFAEWE3453F21<br />
-          操作：用户定制A<br />
-          状态：运行中 | 89%<br />
-          数据规模：12302M<br />
-          IT：2019.11.1 15:23:30<br />
-          TT：2019.11.1 16:10:31
-          <hr>
-          <div class="controlpanel">
-            <button id="operation" onclick="operationonclick('DSAFAEWE3453F21')">操作</button><br />
-            <div class="controlpanel-hidden" id="controlpanelDSAFAEWE3453F21">
-              <button id="selecttasksctript">选择任务脚本</button><br />
-              <button id="prioritystart">优先开始</button><br />
-              <button id="deferredtask">延期任务</button><br />
-              <button id="pausetask">暂停任务</button><br />
-              <div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="jobspanel"></div>
-      </div>
-    </div>
+    <button id="jobs-test" onclick="jobsTest()">测试</button>
     <script type="text/javascript">
       require('./renderer-process/jobs/jobs')
     </script>
