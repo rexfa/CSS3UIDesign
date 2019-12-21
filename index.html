@@ -51,7 +51,8 @@
                     <use xlink:href="assets/img/icons.svg#icon-menu"></use>
                 </svg> 历史结果
             </h5>
-            <button type="button" id="button-history" data-section="history" class="nav-button">查看<em>任务结果</em> </button>
+            <button type="button" id="button-history" data-section="history" class="nav-button">查看<em>任务结果</em>
+            </button>
             <button type="button" id="button-logs" data-section="logs" class="nav-button">查看<em>任务日志</em></button>
         </div>
         <div class="nav-item u-category-communication">
@@ -183,6 +184,25 @@
                 taskpanel.style.height = 200;
             }
         }
+        //测试获取本地工作目录列表
+        const {
+            ipcRenderer
+        } = require('electron')
+
+        const getjobsdataBtn = document.getElementById('btn-getjobsdata')
+
+        getjobsdataBtn.addEventListener('click', () => {
+            ipcRenderer.send('asy-message-loadjobs', 'ping')
+        })
+
+        ipcRenderer.on('asy-message-loadjobs-reply', (event, arg) => {
+            //const message = `Asynchronous message reply: ${arg}`
+            //document.getElementById('async-reply').innerHTML = message
+            for (f in arg) {
+                console.log(f);
+            }
+
+        })
     </script>
 </body>
 

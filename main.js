@@ -3,6 +3,7 @@
 //})
 
 const path = require('path')
+const fs = require('fs');
 const glob = require('glob')
 const { app, BrowserWindow } = require('electron')
 
@@ -15,7 +16,7 @@ let mainWindow = null
 function initialize() {
     makeSingleInstance()
 
-    loadDemos()
+    loadDemos();
 
     function createWindow() {
         const windowOptions = {
@@ -85,9 +86,12 @@ function makeSingleInstance() {
 }
 
 // Require each JS file in the main-process dir
+// 将所有的主进程目录里的js加入进来
 function loadDemos() {
     const files = glob.sync(path.join(__dirname, 'main-process/**/*.js'))
     files.forEach((file) => { require(file) })
 }
 
 initialize()
+
+/*************************** */
