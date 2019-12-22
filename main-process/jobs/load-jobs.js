@@ -7,13 +7,10 @@ ipcMain.on('asy-message-loadjobs', (event, arg) => {
 })
 
 function readJobDataDir() {
-    console.log("gogo");
-    let dataPath = "\job_data";
-    let allfiles;
-    fs.readdir(dataPath, function(err, files) {
-        if (err) return console.log(err);
-        allfiles = files;
-        return files
-    });
-    return allfiles;
+    //console.log("gogo");
+    var dataPath = "./job_data";
+    //var allfiles = [];
+    var i = 0;
+    var files = fs.readdirSync(dataPath);
+    return files;
 }

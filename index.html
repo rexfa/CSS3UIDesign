@@ -94,6 +94,7 @@
         require('./assets/code-blocks')
         require('./assets/normalize-shortcuts')
 
+
         function jobsTest() {
             let ramboName = (+new Date).toString(36)
             addJobInfoPanel(ramboName)
@@ -105,6 +106,16 @@
             setTTTime(clone)
             let workspace = document.getElementsByClassName('workspace-wrapper')
             workspace[0].appendChild(clone)
+        }
+        //获取所有的panel
+        function getAllJobInfoPanel() {
+            let jobs = document.getElementsByClassName('workspace-wrapper')[0].getElementsByClassName("taskpanel");
+            return jobs;
+        }
+        //获取指定name的panel
+        function getJobInfoPanelByJobName(jobName) {
+            let job = document.getElementById("taskpanel" + jobName);
+            return job;
         }
 
         function addJobInfoPanel(jobName) {
@@ -196,13 +207,39 @@
         })
 
         ipcRenderer.on('asy-message-loadjobs-reply', (event, arg) => {
-            //const message = `Asynchronous message reply: ${arg}`
-            //document.getElementById('async-reply').innerHTML = message
-            for (f in arg) {
-                console.log(f);
-            }
+                //const message = `Asynchronous message reply: ${arg}`
+                //document.getElementById('async-reply').innerHTML = message
+                for (var key in arg) {
+                    console.log(arg[key]);
+                    let j = getJobInfoPanelByJobName(arg[key]);
+                    if (!j) {
+                        addJobInfoPanel(arg[key]);
+                    }
+                }
 
-        })
+            })
+            //每5秒检查一下目录
+        setInterval(callJobsDir, 5000);
+
+        function callJobsDir() {
+            //ipcRenderer.send('asy-message-loadjobs', 'ping');
+            let files = readJobDataDir();
+            for (var key in files) {
+                console.log(files[key]);
+                let j = getJobInfoPanelByJobName(files[key]);
+                if (!j) {
+                    addJobInfoPanel(files[key]);
+                }
+            }
+        }
+
+        function readJobDataDir() {
+            //var path = require('path')
+            var fs = require('fs');
+            var dataPath = ".\\job_data";
+            var files = fs.readdirSync(dataPath);
+            return files;
+        }
     </script>
 </body>
 
