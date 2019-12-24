@@ -19,12 +19,14 @@
     </div>
     <div class="jobstemplate">
       <div class="taskpanel" id="taskpanelTTTTT">
-        <div>任务:<em class="task-name"></em></div>
-        <div>操作：<em class="task-operation"></em></div>
-        <div>状态：<em class="task-status"></em></div>
-        <div>数据规模：<em class="task-scale"></em></div>
-        <div>IT：<em class="task-inputtime"></em></div>
-        <div>TT：<em class="task-runtime"></em></div>
+        <div class="taskinfopanel">
+          <div>任务:<em class="task-name"></em></div>
+          <div>操作：<em class="task-operation"></em></div>
+          <div>状态：<em class="task-status"></em></div>
+          <div>数据规模：<em class="task-scale"></em></div>
+          <div>IT：<em class="task-inputtime"></em></div>
+          <div>TT：<em class="task-runtime"></em></div>
+        </div>
         <hr />
         <div class="controlpanel">
           <button class="job-operation">
@@ -39,8 +41,9 @@
         </div>
       </div>
     </div>
-    <button id="jobs-test"  class="test-button" onclick="jobsTest()">测试</button>
+    <button id="jobs-test" class="test-button" onclick="jobsTest()">测试</button>
     <button id="btn-getjobsdata" style="display: none;">获取工作文件列表</button>
+    <div id="jobs-log"></div>
     <script type="text/javascript">
       require('./renderer-process/jobs/jobs')
     </script>

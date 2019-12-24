@@ -69,13 +69,19 @@
 .controlpanel-display {
     display: inline;
 }
-
+.taskinfopanel{
+    border: 0px;
+}
+.taskinfopanel.hidden{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
 .jobstemplate {
     display: none;
     visibility: hidden;
     opacity: 0;
 }
-
 .test-button {
     background-color: #333333;
     border: 2px solid #ff8c00;

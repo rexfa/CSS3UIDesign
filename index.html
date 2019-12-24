@@ -93,7 +93,7 @@
         require('./assets/demo-btns')
         require('./assets/code-blocks')
         require('./assets/normalize-shortcuts')
-
+        
 
         function jobsTest() {
             let ramboName = (+new Date).toString(36)
@@ -187,6 +187,7 @@
             var controlpanel = document.getElementById(controlpanelID);
             var taskpanelID = "taskpanel" + taskname
             var taskpanel = document.getElementById(taskpanelID);
+            //var infopanel = 
             if (controlpanel.className == "controlpanel-hidden") {
                 taskpanel.style.height = 350;
                 controlpanel.className = "controlpanel-display";
@@ -216,30 +217,10 @@
                         addJobInfoPanel(arg[key]);
                     }
                 }
-
             })
-            //每5秒检查一下目录
-        setInterval(callJobsDir, 5000);
+            
+ 
 
-        function callJobsDir() {
-            //ipcRenderer.send('asy-message-loadjobs', 'ping');
-            let files = readJobDataDir();
-            for (var key in files) {
-                console.log(files[key]);
-                let j = getJobInfoPanelByJobName(files[key]);
-                if (!j) {
-                    addJobInfoPanel(files[key]);
-                }
-            }
-        }
-
-        function readJobDataDir() {
-            //var path = require('path')
-            var fs = require('fs');
-            var dataPath = ".\\job_data";
-            var files = fs.readdirSync(dataPath);
-            return files;
-        }
     </script>
 </body>
 
