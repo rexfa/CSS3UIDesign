@@ -117,46 +117,51 @@
             let job = document.getElementById("taskpanel" + jobName);
             return job;
         }
-
+        //创建一个工作面板
         function addJobInfoPanel(jobName) {
-            let template = document.getElementsByClassName("jobstemplate")
-            let clone = template[0].children[0].cloneNode(true)
-            clone.setAttribute("id", "taskpanel" + jobName)
-            setCloneDomContent(clone, "task-name", "tasknamm" + jobName, jobName)
-            setCloneDomContent(clone, "task-operation", "taskoperation" + jobName, "准备完毕")
-            setCloneDomContent(clone, "task-status", "taskstatus" + jobName, "准备")
-            setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G")
-            let btnOperation = clone.getElementsByClassName("job-operation")[0]
-            btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')")
-            let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0]
-            controlpanel.setAttribute("id", "controlpanel" + jobName)
-            setITTime(clone)
-            setTTTime(clone)
-            document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone)
+            let template = document.getElementsByClassName("jobstemplate");
+            let clone = template[0].children[0].cloneNode(true);
+            clone.setAttribute("id", "taskpanel" + jobName);
+   
+            setCloneDomContent(clone, "task-name", "tasknamm" + jobName, jobName);
+            setCloneDomContent(clone, "task-operation", "taskoperation" + jobName, "准备完毕");
+            setCloneDomContent(clone, "task-status", "taskstatus" + jobName, "准备");
+            setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G");
+            let btnOperation = clone.getElementsByClassName("job-operation")[0];
+            btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')");
+            let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0];
+            controlpanel.setAttribute("id", "controlpanel" + jobName);
+            let taskinfopanel = clone.getElementsByClassName("taskinfopanel")[0];
+            taskinfopanel.setAttribute("id","taskinfopanel"+jobName);
+            let taskhr =  clone.getElementsByClassName("task-hr")[0];
+            taskhr.setAttribute("id","taskhr"+jobName);
+            setITTime(clone);
+            setTTTime(clone);
+            document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone);
         }
 
         function setCloneDomContent(cloneNode, className, domId, content) {
-            let target = cloneNode.getElementsByClassName(className)[0]
+            let target = cloneNode.getElementsByClassName(className)[0];
             let dom = document.createElement('em');
             dom.innerHTML = content;
-            dom.id = domId
-            target.appendChild(dom)
+            dom.id = domId;
+            target.appendChild(dom);
         }
 
         function setTTTime(jobInfoNode) {
-            let tt = jobInfoNode.getElementsByClassName("task-runtime")[0]
+            let tt = jobInfoNode.getElementsByClassName("task-runtime")[0];
             let dom = document.createElement('em');
             //dom.className='book';
             dom.innerHTML = CurentTime();
-            tt.appendChild(dom)
+            tt.appendChild(dom);
         }
 
         function setITTime(jobInfoNode) {
-            let tt = jobInfoNode.getElementsByClassName("task-inputtime")[0]
+            let tt = jobInfoNode.getElementsByClassName("task-inputtime")[0];
             let dom = document.createElement('em');
             //dom.className='book';
             dom.innerHTML = CurentTime();
-            tt.appendChild(dom)
+            tt.appendChild(dom);
         }
 
         function CurentTime() {
@@ -182,30 +187,39 @@
             return (clock);
         }
         /* 添加动画用 */
-        function operationonclick(taskname) {
-            var controlpanelID = "controlpanel" + taskname;
+        function operationonclick(jobName) {
+            var controlpanelID = "controlpanel" + jobName;
             var controlpanel = document.getElementById(controlpanelID);
-            var taskpanelID = "taskpanel" + taskname
+            var taskpanelID = "taskpanel" + jobName;
             var taskpanel = document.getElementById(taskpanelID);
+            var taskinfopanelID = "taskinfopanel"+jobName;
+            var taskinfopanel = document.getElementById(taskinfopanelID);
+            var taskhrID = "taskhr"+jobName;
+            var taskhr = document.getElementById(taskhrID);
             //var infopanel = 
             if (controlpanel.className == "controlpanel-hidden") {
-                taskpanel.style.height = 350;
+                //taskpanel.style.height = 350;
                 controlpanel.className = "controlpanel-display";
+                taskinfopanel.classList.add("hidden");
+                taskhr.classList.add("hidden");
+
             } else {
                 controlpanel.className = "controlpanel-hidden";
-                taskpanel.style.height = 200;
+                //taskpanel.style.height = 200;
+                taskinfopanel.classList.remove("hidden");
+                taskhr.classList.remove("hidden");
             }
         }
         //测试获取本地工作目录列表
         const {
             ipcRenderer
-        } = require('electron')
+        } = require('electron');
 
         const getjobsdataBtn = document.getElementById('btn-getjobsdata')
 
         getjobsdataBtn.addEventListener('click', () => {
             ipcRenderer.send('asy-message-loadjobs', 'ping')
-        })
+        });
 
         ipcRenderer.on('asy-message-loadjobs-reply', (event, arg) => {
                 //const message = `Asynchronous message reply: ${arg}`
@@ -217,7 +231,7 @@
                         addJobInfoPanel(arg[key]);
                     }
                 }
-            })
+            });
             
  
 

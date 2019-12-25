@@ -35,13 +35,7 @@
     -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
 }
 
-.workspace hr {
-    display: block;
-    height: 1px;
-    border-color: #ff8c00;
-    margin: 1em 0;
-    padding: 0;
-}
+
 
 .workspace button {
     background-color: #333333;
@@ -77,6 +71,18 @@
     visibility: hidden;
     opacity: 0;
 }
+.task-hr{
+    display: block;
+    height: 1px;
+    border-color: #ff8c00;
+    margin: 1em 0;
+    padding: 0;
+}
+.task-hr.hidden{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
 .jobstemplate {
     display: none;
     visibility: hidden;
@@ -95,4 +101,14 @@
     cursor: pointer;
     width: 50px;
     text-align: center;
+}
+.jobscipttemplate{
+    z-index:999;
+    width: 300px;
+    text-out: 100px;
+}
+.jobscipttemplate.hidden{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
 }

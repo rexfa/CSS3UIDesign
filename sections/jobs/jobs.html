@@ -27,19 +27,22 @@
           <div>IT：<em class="task-inputtime"></em></div>
           <div>TT：<em class="task-runtime"></em></div>
         </div>
-        <hr />
+        <hr class="task-hr" />
         <div class="controlpanel">
           <button class="job-operation">
             操作</button><br />
           <div class="controlpanel-hidden">
-            <button>选择任务脚本</button><br />
-            <button>优先开始</button><br />
-            <button>延期任务</button><br />
-            <button>暂停任务</button><br />
+            <button class="select-script">选择任务脚本</button><br />
+            <button class="priority-start">优先开始</button><br />
+            <button class="delayed-task">延迟任务</button><br />
+            <button class="pause-task">暂停任务</button><br />
             <div></div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="jobscipttemplate">
+      测试
     </div>
     <button id="jobs-test" class="test-button" onclick="jobsTest()">测试</button>
     <button id="btn-getjobsdata" style="display: none;">获取工作文件列表</button>
