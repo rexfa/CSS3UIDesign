@@ -63,31 +63,37 @@
 .controlpanel-display {
     display: inline;
 }
-.taskinfopanel{
+
+.taskinfopanel {
     border: 0px;
 }
-.taskinfopanel.hidden{
+
+.taskinfopanel.hidden {
     display: none;
     visibility: hidden;
     opacity: 0;
 }
-.task-hr{
+
+.task-hr {
     display: block;
     height: 1px;
     border-color: #ff8c00;
     margin: 1em 0;
     padding: 0;
 }
-.task-hr.hidden{
+
+.task-hr.hidden {
     display: none;
     visibility: hidden;
     opacity: 0;
 }
+
 .jobstemplate {
     display: none;
     visibility: hidden;
     opacity: 0;
 }
+
 .test-button {
     background-color: #333333;
     border: 2px solid #ff8c00;
@@ -102,12 +108,30 @@
     width: 50px;
     text-align: center;
 }
-.jobscipttemplate{
-    z-index:999;
-    width: 300px;
-    text-out: 100px;
+
+.jobscripttemplate {
+    position: absolute;
+    z-index: 999;
+    width: 450px;
+    top: 100px;
+    left: 100px;
+    float: left;
+    margin: 1rem;
+    border: 2px solid #ff8c00;
+    padding: 10px 20px;
+    background: #333333;
+    opacity: 0.9;
+    border-radius: 10px;
+    /*text-indent: -5em;*/
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    color: #ff8c00;
+    transition: width 2s, height 2s, transform 2s;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
 }
-.jobscipttemplate.hidden{
+
+.jobscripttemplate.hidden {
     display: none;
     visibility: hidden;
     opacity: 0;
