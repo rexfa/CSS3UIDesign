@@ -136,3 +136,21 @@
     visibility: hidden;
     opacity: 0;
 }
+
+.script-radio [type="radio"]:checked+span {
+	display: inline-block;
+	border-radius: .05rem;
+	width: .28rem;
+	height: .28rem;
+	border: .02rem solid #ff8c00;
+	color: #ff8c00;
+	position: absolute;
+	top: 0;
+	left: -.5rem;
+}
+.script-radio[type="radio"]:checked+span:after {
+	content: '\2714';
+	position: absolute;
+	font-size: 0.28rem;
+	left: 0.05rem;
+}
