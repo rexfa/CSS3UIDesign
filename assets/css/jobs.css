@@ -13,7 +13,7 @@
 
 .workspace-wrapper {
     position: relative;
-    max-width: 740px;
+    max-width: 780px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -35,14 +35,12 @@
     -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
 }
 
-
-
 .workspace button {
     background-color: #333333;
     border: 2px solid #ff8c00;
     border-radius: 10px;
     color: #ff8c00;
-    padding: 5px 6px;
+    padding: 7px 7px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -78,7 +76,7 @@
     display: block;
     height: 1px;
     border-color: #ff8c00;
-    margin: 1em 0;
+    margin: 16px 0px;
     padding: 0;
 }
 
@@ -106,6 +104,21 @@
     margin: 2px 1px;
     cursor: pointer;
     width: 50px;
+    text-align: center;
+}
+
+.jobscriptsave-button {
+    background-color: #333333;
+    border: 2px solid #ff8c00;
+    border-radius: 10px;
+    color: #ff8c00;
+    padding: 5px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 1px;
+    cursor: pointer;
+    width: 200px;
     text-align: center;
 }
 
@@ -137,20 +150,44 @@
     opacity: 0;
 }
 
-.script-radio [type="radio"]:checked+span {
-	display: inline-block;
-	border-radius: .05rem;
-	width: .28rem;
-	height: .28rem;
-	border: .02rem solid #ff8c00;
-	color: #ff8c00;
-	position: absolute;
-	top: 0;
-	left: -.5rem;
+li {
+    display: block;
+    margin: 1px;
 }
-.script-radio[type="radio"]:checked+span:after {
-	content: '\2714';
-	position: absolute;
-	font-size: 0.28rem;
-	left: 0.05rem;
+
+.script-label {
+    margin: 20px 20px 0 0;
+    display: inline-block
+}
+
+.script-radio {
+    display: none
+}
+
+.script-radioInput {
+    background-color: #333333;
+    border: 1px solid #ff8c00;
+    border-radius: 4px;
+    display: inline-block;
+    height: 16px;
+    margin-right: 10px;
+    margin-top: -1px;
+    vertical-align: middle;
+    width: 16px;
+    line-height: 1
+}
+
+.script-radio:checked+.script-radioInput:after {
+    background-color: #ff8c00;
+    border-radius: 4px;
+    content: "";
+    display: inline-block;
+    height: 12px;
+    margin: 1px;
+    width: 12px
+}
+
+.script-checkbox.script-radioInput,
+.script-radio:checked+.script-checkbox.script-radioInput:after {
+    border-radius: 4px;
 }

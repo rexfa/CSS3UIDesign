@@ -41,19 +41,36 @@
         </div>
       </div>
     </div>
-    <div class="jobscripttemplate">
+    <div class="jobscripttemplate hidden">
       <div>任务脚本选择</div>
       <div class="script-jobname">任务名称:<em></em></div>
       <div class="script-listpanel">脚本列表:
-        <ul>
-          <li><input class="script-radio" type="radio" name="script-selector" value="ss0" checked />缺省脚本A</li>
-          <li><input class="script-radio" type="radio" name="script-selector" value="ss1"/>缺省脚本B</li>
-          <li><input class="script-radio" type="radio" name="script-selector" value="us0"/>用户脚本A</li>
-          <li><input class="script-radio" type="radio" name="script-selector" value="ds0"/>下载脚本A</li>
-          <li><input class="script-radio" type="radio" name="script-selector" value="ds1"/>下载脚本B</li>
+        <ul class="script-listpanelul">
+          <li> <label class="script-label">
+              <input class="script-radio" type="radio" name="jobscriptradio">
+              <span class="script-checkbox script-radioInput"></span>系统脚本A
+            </label></li>
+          <li> <label class="script-label">
+              <input class="script-radio" type="radio" name="jobscriptradio">
+              <span class="script-checkbox script-radioInput"></span>系统脚本B
+            </label></li>
+          <li> <label class="script-label">
+              <input class="script-radio" type="radio" name="jobscriptradio">
+              <span class="script-checkbox script-radioInput"></span>用户脚本A
+            </label></li>
+          <li> <label class="script-label">
+              <input class="script-radio" type="radio" name="jobscriptradio">
+              <span class="script-checkbox script-radioInput"></span>下载脚本A
+            </label></li>
+          <li> <label class="script-label">
+              <input class="script-radio" type="radio" name="jobscriptradio">
+              <span class="script-checkbox script-radioInput"></span>下载脚本B
+            </label></li>
         </ul>
       </div>
-      ----------------------------------------------测试----------------------------------------------------
+      <div>
+        <button id="save-script" class="jobscriptsave-button" onclick="saveScript()">保存脚本选择</button>
+      </div>
     </div>
     <button id="jobs-test" class="test-button" onclick="jobsTest()">测试</button>
     <button id="btn-getjobsdata" style="display: none;">获取工作文件列表</button>
