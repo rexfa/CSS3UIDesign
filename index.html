@@ -93,7 +93,7 @@
         require('./assets/demo-btns')
         require('./assets/code-blocks')
         require('./assets/normalize-shortcuts')
-        
+
 
         function jobsTest() {
             let ramboName = (+new Date).toString(36)
@@ -122,19 +122,21 @@
             let template = document.getElementsByClassName("jobstemplate");
             let clone = template[0].children[0].cloneNode(true);
             clone.setAttribute("id", "taskpanel" + jobName);
-   
+
             setCloneDomContent(clone, "task-name", "tasknamm" + jobName, jobName);
             setCloneDomContent(clone, "task-operation", "taskoperation" + jobName, "准备完毕");
             setCloneDomContent(clone, "task-status", "taskstatus" + jobName, "准备");
             setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G");
             let btnOperation = clone.getElementsByClassName("job-operation")[0];
             btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')");
+            let btnSelectScript = clone.getElementsByClassName("select-script")[0];
+            btnSelectScript.setAttribute("onclick", "selectscriptonclick('" + jobName + "')");
             let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0];
             controlpanel.setAttribute("id", "controlpanel" + jobName);
             let taskinfopanel = clone.getElementsByClassName("taskinfopanel")[0];
-            taskinfopanel.setAttribute("id","taskinfopanel"+jobName);
-            let taskhr =  clone.getElementsByClassName("task-hr")[0];
-            taskhr.setAttribute("id","taskhr"+jobName);
+            taskinfopanel.setAttribute("id", "taskinfopanel" + jobName);
+            let taskhr = clone.getElementsByClassName("task-hr")[0];
+            taskhr.setAttribute("id", "taskhr" + jobName);
             setITTime(clone);
             setTTTime(clone);
             document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone);
@@ -192,9 +194,9 @@
             var controlpanel = document.getElementById(controlpanelID);
             var taskpanelID = "taskpanel" + jobName;
             var taskpanel = document.getElementById(taskpanelID);
-            var taskinfopanelID = "taskinfopanel"+jobName;
+            var taskinfopanelID = "taskinfopanel" + jobName;
             var taskinfopanel = document.getElementById(taskinfopanelID);
-            var taskhrID = "taskhr"+jobName;
+            var taskhrID = "taskhr" + jobName;
             var taskhr = document.getElementById(taskhrID);
             //var infopanel = 
             if (controlpanel.className == "controlpanel-hidden") {
@@ -210,6 +212,10 @@
                 taskhr.classList.remove("hidden");
             }
         }
+        /* 显示选择脚本 */
+        function selectscriptonclick(jobName) {
+
+        }
         //测试获取本地工作目录列表
         const {
             ipcRenderer
@@ -222,19 +228,16 @@
         });
 
         ipcRenderer.on('asy-message-loadjobs-reply', (event, arg) => {
-                //const message = `Asynchronous message reply: ${arg}`
-                //document.getElementById('async-reply').innerHTML = message
-                for (var key in arg) {
-                    console.log(arg[key]);
-                    let j = getJobInfoPanelByJobName(arg[key]);
-                    if (!j) {
-                        addJobInfoPanel(arg[key]);
-                    }
+            //const message = `Asynchronous message reply: ${arg}`
+            //document.getElementById('async-reply').innerHTML = message
+            for (var key in arg) {
+                console.log(arg[key]);
+                let j = getJobInfoPanelByJobName(arg[key]);
+                if (!j) {
+                    addJobInfoPanel(arg[key]);
                 }
-            });
-            
- 
-
+            }
+        });
     </script>
 </body>
 
