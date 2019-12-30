@@ -61,7 +61,8 @@
                     <use xlink:href="assets/img/icons.svg#icon-communication"></use>
                 </svg> 通信
             </h5>
-            <button type="button" id="button-apply-for-service" data-section="apply-for-service" class="nav-button">申请<em>服务</em></button>
+            <button type="button" id="button-apply-for-service" data-section="apply-for-service"
+                class="nav-button">申请<em>服务</em></button>
         </div>
 
         <div class="nav-item u-category-system">
@@ -70,7 +71,8 @@
                     <use xlink:href="assets/img/icons.svg#icon-system"></use>
                 </svg> 系统
             </h5>
-            <button type="button" id="button-app-sys-information" data-section="app-sys-information" class="nav-button">显示 <em>系统信息</em></button>
+            <button type="button" id="button-app-sys-information" data-section="app-sys-information"
+                class="nav-button">显示 <em>系统信息</em></button>
             <button type="button" id="button-settings" data-section="settings" class="nav-button">平台<em>设置</em></button>
         </div>
 
@@ -147,7 +149,15 @@
             let dom = document.createElement('em');
             dom.innerHTML = content;
             dom.id = domId;
+            var child = document.getElementById(domId);
+            if (null != child) {
+                target.removeChild(child);
+            }
             target.appendChild(dom);
+        }
+        function setDomContent(domId,content){
+            var dom = document.getElementById(domId);
+            dom.innerHTML = content;
         }
 
         function setTTTime(jobInfoNode) {
@@ -214,8 +224,26 @@
         }
         /* 显示选择脚本 */
         function selectscriptonclick(jobName) {
-
+            var scriptselector = document.getElementsByClassName("jobscripttemplate")[0];
+            scriptselector.classList.remove("hidden");
+            let btnSelectScriptSave = document.getElementsByClassName("jobscriptsave-button")[0];
+            btnSelectScriptSave.setAttribute("onclick", "selectscriptsaveonclick('" + jobName + "')");
+            setCloneDomContent(scriptselector, "script-jobname", "script-jobname", jobName);
         }
+        /*保存选择脚本，让选择界面消失 */
+        function selectscriptsaveonclick(jobName) {
+            var scriptselector = document.getElementsByClassName("jobscripttemplate")[0];
+            scriptselector.classList.add("hidden");
+            var jobscriptradio = document.getElementsByName("jobscriptradio");
+            for (i=0; i<jobscriptradio.length; i++) {
+                if (jobscriptradio[i].checked) {
+                    setDomContent("taskoperation"+jobName,jobscriptradio[i].value);
+                }
+            }
+        
+            
+        }
+        
         //测试获取本地工作目录列表
         const {
             ipcRenderer
