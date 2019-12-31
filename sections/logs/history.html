@@ -11,11 +11,52 @@
           <h3>保存近期历史任务，较远期的已经被删除</h3>
         </div>
       </header>
-  
-  
-  
+      <div class="workspace">
+        <div id="historyPanel" class="workspace-wrapper">
+
+        </div>
+      </div>
+      <div class="historytemplate">
+        <div class="historypanel" id="history">
+          <div class="historyinfopanel">
+            <div>任务:<em class="history-name"></em></div>
+            <div>操作：<em class="history-operation"></em></div>
+            <div>状态：<em class="history-status"></em></div>
+            <div>FT：<em class="history-finishtime"></em></div>
+            <div>IT：<em class="history-inputtime"></em></div>
+          </div>
+          <div class="historycontrolpanel">
+            <hr class="history-hr" />
+            <button class="history-operation">
+              获取结果</button><br />
+          </div>
+        </div>
+      </div>
       <script type="text/javascript">
-  
+        require('./renderer-process/logs/history')
+        function addHistoryPanel(jobName) {
+          let template = document.getElementsByClassName("jobstemplate");
+          let clone = template[0].children[0].cloneNode(true);
+          clone.setAttribute("id", "taskpanel" + jobName);
+
+          setCloneDomContent(clone, "task-name", "tasknamm" + jobName, jobName);
+          setCloneDomContent(clone, "task-operation", "taskoperation" + jobName, "准备完毕");
+          setCloneDomContent(clone, "task-status", "taskstatus" + jobName, "准备");
+          setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G");
+          let btnOperation = clone.getElementsByClassName("job-operation")[0];
+          btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')");
+          let btnSelectScript = clone.getElementsByClassName("select-script")[0];
+          btnSelectScript.setAttribute("onclick", "selectscriptonclick('" + jobName + "')");
+          let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0];
+          controlpanel.setAttribute("id", "controlpanel" + jobName);
+          let taskinfopanel = clone.getElementsByClassName("taskinfopanel")[0];
+          taskinfopanel.setAttribute("id", "taskinfopanel" + jobName);
+          let taskhr = clone.getElementsByClassName("task-hr")[0];
+          taskhr.setAttribute("id", "taskhr" + jobName);
+          setITTime(clone);
+          setTTTime(clone);
+          document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone);
+      }
       </script>
   
     </section>

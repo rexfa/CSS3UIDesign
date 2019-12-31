@@ -1,0 +1,8 @@
+raw reads number: 
+1850963
+
+clean reads number: 
+1698846
+
+alignment reads number: 
+293652
