@@ -36,7 +36,8 @@
     </div>
     <script type="text/javascript">
       require('./renderer-process/logs/history')
-
+      const path = require('path');
+      const {shell} = require('electron');
       function addHistoryPanel(jobName, scriptName) {
         let template = document.getElementsByClassName("historytemplate");
         let clone = template[0].children[0].cloneNode(true);
@@ -57,8 +58,12 @@
         setHTTTime(clone);
         document.getElementsByClassName('history-workspace-wrapper')[0].appendChild(clone);
       }
-      function gethistoryresultonclick(jobName){}
-      function gethistoryreportonclick(jobName){}
+      function gethistoryresultonclick(jobName){
+        shell.openItem(__dirname+ '/jobs_results/'+jobName+'.csv');
+      }
+      function gethistoryreportonclick(jobName){
+        shell.openItem(__dirname+ '/jobs_results/'+jobName+'.txt');
+      }
       
       function setHFTTime(historyInfoNode) {
         let ftt = historyInfoNode.getElementsByClassName("history-finishtime")[0];
@@ -75,10 +80,10 @@
         dom.innerHTML = CurentTime();
         htt.appendChild(dom);
       }
-      addHistoryPanel("s70_reads_number","用户脚本A");
-      addHistoryPanel("f72_reads_number","用户脚本B");
-      addHistoryPanel("swz_reads_number","系统脚本A");
-      addHistoryPanel("s12_reads_number","下载脚本B");
+      addHistoryPanel("s70_SpeciesCount","用户脚本A");
+      addHistoryPanel("f72_SpeciesCount","用户脚本B");
+      addHistoryPanel("swz_SpeciesCount","系统脚本A");
+      addHistoryPanel("s12_SpeciesCount","下载脚本B");
     </script>
 
   </section>
