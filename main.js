@@ -32,7 +32,7 @@ function initialize() {
         if (process.platform === 'linux') {
             windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png')
         }
-
+        //启动主要页面
         mainWindow = new BrowserWindow(windowOptions)
         mainWindow.loadURL(path.join('file://', __dirname, '/index.html'))
 

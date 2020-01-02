@@ -19,3 +19,11 @@
     transition: width 2s, height 2s, transform 2s;
     -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
 }
+
+.history-hr {
+    display: block;
+    height: 1px;
+    border-color: #ff8c00;
+    margin: 16px 0px;
+    padding: 0;
+}

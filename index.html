@@ -108,12 +108,12 @@
             let template = document.getElementsByClassName("jobstemplate")
             let clone = template[0].children[0].cloneNode(true)
             setTTTime(clone)
-            let workspace = document.getElementsByClassName('workspace-wrapper')
+            let workspace = document.getElementsByClassName('jobs-workspace-wrapper')
             workspace[0].appendChild(clone)
         }
         //获取所有的panel
         function getAllJobInfoPanel() {
-            let jobs = document.getElementsByClassName('workspace-wrapper')[0].getElementsByClassName("taskpanel");
+            let jobs = document.getElementsByClassName('jobs-workspace-wrapper')[0].getElementsByClassName("taskpanel");
             return jobs;
         }
         //获取指定name的panel
@@ -127,7 +127,7 @@
             let clone = template[0].children[0].cloneNode(true);
             clone.setAttribute("id", "taskpanel" + jobName);
 
-            setCloneDomContent(clone, "task-name", "tasknamm" + jobName, jobName);
+            setCloneDomContent(clone, "task-name", "taskname" + jobName, jobName);
             setCloneDomContent(clone, "task-operation", "taskoperation" + jobName, "准备完毕");
             setCloneDomContent(clone, "task-status", "taskstatus" + jobName, "准备");
             setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G");
@@ -141,9 +141,9 @@
             taskinfopanel.setAttribute("id", "taskinfopanel" + jobName);
             let taskhr = clone.getElementsByClassName("task-hr")[0];
             taskhr.setAttribute("id", "taskhr" + jobName);
-            setITTime(clone);
-            setTTTime(clone);
-            document.getElementsByClassName('workspace-wrapper')[0].appendChild(clone);
+            setJITTime(clone);
+            setJTTTime(clone);
+            document.getElementsByClassName('jobs-workspace-wrapper')[0].appendChild(clone);
         }
 
         function setCloneDomContent(cloneNode, className, domId, content) {
@@ -163,7 +163,7 @@
             dom.innerHTML = content;
         }
 
-        function setTTTime(jobInfoNode) {
+        function setJTTTime(jobInfoNode) {
             let tt = jobInfoNode.getElementsByClassName("task-runtime")[0];
             let dom = document.createElement('em');
             //dom.className='book';
@@ -171,7 +171,7 @@
             tt.appendChild(dom);
         }
 
-        function setITTime(jobInfoNode) {
+        function setJITTime(jobInfoNode) {
             let tt = jobInfoNode.getElementsByClassName("task-inputtime")[0];
             let dom = document.createElement('em');
             //dom.className='book';
