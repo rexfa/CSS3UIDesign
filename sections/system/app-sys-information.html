@@ -23,8 +23,18 @@
           <div class="appsysinfodiv"><div class="appsysinfoname">空闲内存:</div><div class="appsysinfocontent" id="info-freeMem"></div></div>
         </div>
       </div>
-      <div id="appsysCPUinfoPanel" class="appsysinfo-workspace-wrapper">
-        
+      <div  class="appsysinfo-workspace-wrapper">
+        <div id="appsysCPUinfoPanel" class="appsysinfopanel">
+
+        </div>
+      </div>
+    </div>
+    <div class="appsysCPUInfotemplate">
+      <div class="CPUCoreInfopanel">
+          <div>处理器单元:<em class="cpucore-name"></em></div>
+          <div>型号:<em class="cpucore-model"></em></div>
+          <div>频率:<em class="cpucore-rate"></em></div>
+          <div>使用率：<em class="cpucore-userate"></em></div>
       </div>
     </div>
 
@@ -57,6 +67,20 @@
         (mem > (1 << 10)) && (mem > (1 << 20)) && (KB = (mem / (1 << 10)).toFixed(2));
         return G > 0 ? G + 'G' : M > 0 ? M + 'M' : KB > 0 ? KB + 'KB' : mem + 'B';
       };
+
+      function addCPUInfoPanel(cpuName, cpuModel,cpuRate,cpuUseRate) {
+        let template = document.getElementsByClassName("appsysCPUInfotemplate");
+        let clone = template[0].children[0].cloneNode(true);
+        clone.setAttribute("id", "appsyscpu" + cpuName);
+
+        setCloneDomContent(clone, "cpucore-name", "cpucore-name" + cpuName, cpuName);
+        setCloneDomContent(clone, "cpucore-model", "cpucore-model" + cpuName, cpuModel);
+        setCloneDomContent(clone, "cpucore-rate", "cpucore-rate" + cpuName, cpuRate);
+        setCloneDomContent(clone, "cpucore-userate", "cpucore-userate" + cpuName, cpuUseRate);
+        document.getElementById('appsysCPUinfoPanel').appendChild(clone);
+      }
+
+
       //cpu架构
       const arch = os.arch();
       //console.log("cpu架构：" + arch);
@@ -99,6 +123,7 @@
         console.log(`频率：${cpu.speed}MHz`);
         console.log(
           `使用率：${((1-times.idle/(times.idle+times.user+times.nice+times.sys+times.irq))*100).toFixed(2)}%`);
+          addCPUInfoPanel('cpu'+idx,cpu.model,cpu.speed+'MHz',((1-times.idle/(times.idle+times.user+times.nice+times.sys+times.irq))*100).toFixed(2)+'%');
       });
 
       //网卡

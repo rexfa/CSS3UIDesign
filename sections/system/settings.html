@@ -1,22 +1,57 @@
 <template class="task-template">
-    <section id="settings-section" class="section js-section u-category-system">
-      <header class="section-header">
-        <div class="section-wrapper">
-          <h1>
-            <svg class="section-icon">
-              <use xlink:href="assets/img/icons.svg#icon-system"></use>
-            </svg>
-            系统设置
-          </h1>
-          <h3>如无必要请勿随意改变系统设置</h3>
+  <section id="settings-section" class="section js-section u-category-system">
+    <header class="section-header">
+      <div class="section-wrapper">
+        <h1>
+          <svg class="section-icon">
+            <use xlink:href="assets/img/icons.svg#icon-system"></use>
+          </svg>
+          系统设置
+        </h1>
+        <h3>如无必要请勿随意改变系统设置</h3>
+      </div>
+    </header>
+    <div class="workspace">
+      <div id="appsyssetPanel" class="appsyssettings-workspace-wrapper">
+
+        <div class="appsyssettingspanel">
+          <div class="appsyssettingsline">
+            <div class="appsyssettingtitle">自动检索任务目录:</div>
+            <div class="appsyssettingswitch">
+              <input class="appsyssettings-checkbox" id="autoloadjobs-switch" type="checkbox">
+              <label class="appsyssettings-label" for="onoffswitch">
+                <span class="appsyssettings-inner" data-on="ON" data-off="OFF"></span>
+                <span class="appsyssettings-switch"></span>
+              </label>
+            </div>
+          </div>
+          <div class="appsyssettingsline">
+            <div class="appsyssettingtitle">保护系统资源:</div>
+            <div class="appsyssettingswitch">
+              <input class="appsyssettings-checkbox" id="savesysresource-switch" type="checkbox">
+              <label class="appsyssettings-label" for="onoffswitch">
+                <span class="appsyssettings-inner" data-on="ON" data-off="OFF"></span>
+                <span class="appsyssettings-switch"></span>
+              </label>
+            </div>
+          </div>
+          <div class="appsyssettingsline">
+            <div class="appsyssettingtitle">自动维护存储空间:</div>
+            <div class="appsyssettingswitch">
+              <input class="appsyssettings-checkbox" id="savedriver-switch" type="checkbox">
+              <label class="appsyssettings-label" for="onoffswitch">
+                <span class="appsyssettings-inner" data-on="ON" data-off="OFF"></span>
+                <span class="appsyssettings-switch"></span>
+              </label>
+            </div>
+          </div>
         </div>
-      </header>
-  
-  
-  
-      <script type="text/javascript">
-  
-      </script>
-  
-    </section>
-  </template>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+
+  </section>
+</template>

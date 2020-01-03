@@ -1,0 +1,114 @@
+.appsyssettings-workspace-wrapper {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.appsyssettingspanel {
+    float: left;
+    margin: 1rem;
+    border: 2px solid #ff8c00;
+    padding: 10px 20px;
+    background: #333333;
+    width: 600px;
+    border-radius: 10px;
+    /*text-indent: -5em;*/
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    color: #ff8c00;
+    transition: width 2s, height 2s, transform 2s;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+}
+.appsyssettingsline{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.appsyssettingtitle{
+    width: 400px;
+    float: left;
+    font-size: large;
+}
+
+.appsyssettingswitch {
+    position: relative;
+    float: right; 
+    width: 90px;
+    margin: 0;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select: none;
+}
+ 
+.appsyssettings-checkbox {
+    display: none;
+}
+ 
+.appsyssettings-label {
+    display: block; 
+    overflow: hidden; 
+    cursor: pointer;
+    border: 2px solid #ff8c00; 
+    border-radius: 20px;
+}
+ 
+.appsyssettings-inner {
+    display: block; 
+    width: 200%; 
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+ 
+.appsyssettings-inner::before, .appsyssettings-inner::after {
+    display: block; 
+    float: right; 
+    width: 50%; 
+    height: 30px; 
+    padding: 0; 
+    line-height: 30px;
+    font-size: 14px; 
+    color: ff8c00; 
+    font-family: 
+    Trebuchet, Arial, sans-serif; 
+    font-weight: bold;
+    box-sizing: border-box;
+}
+ 
+.appsyssettings-inner::after {
+    content: attr(data-on);
+    padding-left: 10px;
+    background-color: #ff8c00; 
+    color: #FFFFFF;
+}
+ 
+.appsyssettings-inner::before {
+    content: attr(data-off);
+    padding-right: 10px;
+    background-color: #EEEEEE; 
+    color: #999999;
+    text-align: right;
+}
+ 
+.appsyssettings-switch {
+    position: absolute; 
+    display: block; 
+    width: 22px;
+    height: 22px;
+    margin: 4px;
+    background: #FFFFFF;
+    top: 0; 
+    bottom: 0;
+    right: 56px;
+    border: 2px solid #ff8c00; 
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+}
+ 
+.appsyssettings-checkbox:checked + .appsyssettings-label .appsyssettings-inner {
+    margin-left: 0;
+}
+ 
+.appsyssettings-checkbox:checked + .appsyssettings-label .appsyssettings-switch {
+    right: 0px; 
+}

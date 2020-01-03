@@ -20,6 +20,7 @@
     transition: width 2s, height 2s, transform 2s;
     -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
 }
+
 .appsysinfodiv{
     width: 100%;
 }
@@ -28,4 +29,9 @@
 }
 .appsysinfocontent{
     display: inline;
+}
+.appsysCPUInfotemplate{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
 }
