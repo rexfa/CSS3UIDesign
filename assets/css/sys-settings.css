@@ -90,7 +90,7 @@
     content: attr(data-off);
     padding-right: 10px;
     background-color: #EEEEEE;
-    color: #999999;
+    color: #ff8c00;
     text-align: right;
 }
 
@@ -115,4 +115,22 @@
 
 .appsyssettings-checkbox:checked+.appsyssettings-label .appsyssettings-switch {
     right: 0px;
+}
+
+.appsyssettings-number {
+    border: 2px solid #ff8c00;
+    width: 90px;
+    font-weight: bold;
+    font-size: large;
+    color: #ff8c00;
+    border-radius: 5px;
+    padding-left: 2px;
+}
+
+.appsyssettings-number::-webkit-inner-spin-button {
+    color: #ff8c00;
+}
+
+.appsyssettings-number::-webkit-outer-spin-button {
+    color: #ff8c00;
 }

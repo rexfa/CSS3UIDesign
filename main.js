@@ -30,7 +30,7 @@ function initialize() {
         }
 
         if (process.platform === 'linux') {
-            windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png')
+            windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/dna.png')
         }
         //启动主要页面
         mainWindow = new BrowserWindow(windowOptions)

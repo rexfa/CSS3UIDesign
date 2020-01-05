@@ -11,8 +11,8 @@
         "test": "mocha && standard",
         "package": "npm-run-all package:*",
         "pack": "npm run pack:main &amp;&amp; npm run pack:renderer",
-        "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
-        "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
+        "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/dna.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
+        "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/dna.ico",
         "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out",
         "package:sign-exe": "signcode './out/Electron Demos-win32-ia32/Electron Demo.exe' --cert ~/electron-demo.p12 --prompt --name 'Electron Demo' --url 'http://electron.rexfa.cc'",
         "package:installer": "node ./script/installer.js",
@@ -65,11 +65,11 @@
         "output": "build"
     },
     "mac": {
-        "icon": "assets/app-icon/mac/app.icns",
+        "icon": "assets/app-icon/mac/dna.icns",
         "artifactName": "${productName}_setup_${version}.${ext}"
     },
     "win": {
-        "icon": "bassets/app-icon/win/app.ico",
+        "icon": "bassets/app-icon/win/dna.ico",
         "artifactName": "${productName}_setup_${version}.${ext}"
     },
     "linux": {

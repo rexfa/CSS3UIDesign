@@ -18,7 +18,7 @@
           <div class="appsyssettingsline">
             <div class="appsyssettingtitle">自动检索任务目录:</div>
             <div class="appsyssettingsswitch">
-              <input class="appsyssettings-checkbox" id="autoloadjobs-switch" type="checkbox">
+              <input class="appsyssettings-checkbox" id="autoloadjobs-switch" type="checkbox" checked>
               <label class="appsyssettings-label" for="autoloadjobs-switch">
                 <span class="appsyssettings-inner" data-on="ON" data-off="OFF"></span>
                 <span class="appsyssettings-switch"></span>
@@ -28,13 +28,19 @@
           <div class="appsyssettingsline">
             <div class="appsyssettingtitle">同时可进行任务:</div>
             <div class="appsyssettingsswitch">
-              <input class="appsyssettings-number" id="task-number" type="number">
+              <input class="appsyssettings-number" id="task-number" type="number" value="2" min="1" max="10">
+            </div>
+          </div>
+          <div class="appsyssettingsline">
+            <div class="appsyssettingtitle">最少保存结果数量:</div>
+            <div class="appsyssettingsswitch">
+              <input class="appsyssettings-number" id="saveresult-number" type="number" value="10" min="1" max="20">
             </div>
           </div>
           <div class="appsyssettingsline">
             <div class="appsyssettingtitle">保护系统资源:</div>
             <div class="appsyssettingsswitch">
-              <input class="appsyssettings-checkbox" id="savesysresource-switch" type="checkbox">
+              <input class="appsyssettings-checkbox" id="savesysresource-switch" type="checkbox" checked>
               <label class="appsyssettings-label" for="savesysresource-switch">
                 <span class="appsyssettings-inner" data-on="ON" data-off="OFF"></span>
                 <span class="appsyssettings-switch"></span>
