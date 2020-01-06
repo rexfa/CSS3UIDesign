@@ -48,21 +48,21 @@ do
     echo "########## Processing Sample: ${sampleID} ##########"
     echo "####################################################"
 
-    ##########  Trimmomatic to remove adaptors and low quality reads ############�Բ����reads����������飬�Ƴ������͵Ĳ��������
+    ##########  Trimmomatic to remove adaptors and low quality reads ############对测序的reads进行质量检查，移除质量低的测序短序列
     java -jar  ${TrimmomaticPath}/trimmomatic-0.38.jar  PE -threads 36 -phred33  ${baseDIR}/${sampleDIR}/${R1ID}  ${baseDIR}/${sampleDIR}/${R2ID}   ${baseDIR}/${sampleDIR}/${sampleID}_clean1.fq  ${baseDIR}/${sampleDIR}/${sampleID}_unpaired1.fq  ${baseDIR}/${sampleDIR}/${sampleID}_clean2.fq  ${baseDIR}/${sampleDIR}/${sampleID}_unpaired2.fq   ILLUMINACLIP:${TrimmomaticAdap}/TruSeq3-PE.fa:2:30:10  LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
     echo "raw reads number: " > ${baseDIR}/${sampleDIR}/${sampleID}_reads_number.txt
-#ԭʼ����Ĳ����������Ŀ
+#原始输入的测序短序列数目
     gunzip -c ${baseDIR}/${sampleDIR}/${R1ID} > ${baseDIR}/${sampleDIR}/temp
 
     wc -l ${baseDIR}/${sampleDIR}/temp  | awk '{print $1/4}' >>  ${baseDIR}/${sampleDIR}/${sampleID}_reads_number.txt
     rm ${baseDIR}/${sampleDIR}/temp
     
      echo "clean reads number: " >> ${baseDIR}/${sampleDIR}/${sampleID}_reads_number.txt 
-#�����������˺��������Ŀ
+#经过质量过滤后的质量数目
     wc -l ${baseDIR}/${sampleDIR}/${sampleID}_clean2.fq | awk '{print $1/4}' >>  ${baseDIR}/${sampleDIR}/${sampleID}_reads_number.txt 
  
     ########## bwa to mapping to human genome  ##########
-#�����������˺�Ĳ���������ȱȶ������˵Ļ����飬�ѱȶ��������˵Ĳ���Ƭ�θ����˵�
+#将质量检查过滤后的测序短序列先比对宿主人的基因组，把比对上宿主人的测序片段给过滤掉
   bwa mem -t 36 ${PathDIR}/H_sapiens/GRCh38_latest_genomic.fna  ${baseDIR}/${sampleDIR}/${sampleID}_clean1.fq  ${baseDIR}/${sampleDIR}/${sampleID}_clean2.fq  >  ${baseDIR}/${sampleDIR}/${sampleID}_mem-pe.sam
 
     ########## samtools to screen non-human reads  ##########
@@ -72,10 +72,10 @@ do
     bedtools bamtofastq -i ${baseDIR}/${sampleDIR}/${sampleID}_filterSorted.bam  -fq ${baseDIR}/${sampleDIR}/${sampleID}_filtered1.fq -fq2 ${baseDIR}/${sampleDIR}/${sampleID}_filtered2.fq
    echo "alignment reads number: " >> ${baseDIR}/${sampleDIR}/${sampleID}_reads_number.txt 
    wc -l ${baseDIR}/${sampleDIR}/${sampleID}_filtered1.fq | awk '{print $1/4}' >>  ${baseDIR}/${sampleDIR}/${sampleID}_reads_number.txt
-  #�ѱȶ��������˻�����Ĳ�������й��˺󣬻�ʣ�µĲ����������Ŀ
+  #把比对上宿主人基因组的测序短序列过滤后，还剩下的测序短序列数目
     ########## bwa to mapping to bacteria fun vir arc genomes  ##########
     bwa mem -t 36  ${PathDIR}/RefGenome/Gb_Arc_Bac_Fun_Vir_noplasmid.fa  ${baseDIR}/${sampleDIR}/${sampleID}_filtered1.fq  ${baseDIR}/${sampleDIR}/${sampleID}_filtered2.fq  >  ${baseDIR}/${sampleDIR}/${sampleID}_Gb_Arc_Bac_Fun_Vir_mem-pe.sam
-#��ʣ�µĲ�������и����е�΢���������ȶԣ��ҳ���ԭ΢����
+#将剩下的测序短序列跟所有的微生物基因组比对，找出病原微生物
     ##########  get unique mapping reads ##########
     /data/software/samtools-1.8/samtools-1.8/samtools view -G 12  -S -b -@ 36 ${baseDIR}/${sampleDIR}/${sampleID}_Gb_Arc_Bac_Fun_Vir_mem-pe.sam | /data/software/samtools-1.8/samtools-1.8/samtools sort -n -@ 36 -o ${baseDIR}/${sampleDIR}/${sampleID}_Gb_Arc_Bac_Fun_Vir_filterSorted.bam
     /data/software/samtools-1.8/samtools-1.8/samtools view  ${baseDIR}/${sampleDIR}/${sampleID}_Gb_Arc_Bac_Fun_Vir_filterSorted.bam  >  ${baseDIR}/${sampleDIR}/${sampleID}_Gb_Arc_Bac_Fun_Vir_filterSorted.sam
@@ -89,7 +89,7 @@ do
    # /data/software/R/R-3.4.3/bin/Rscript  testpraseResult.R ${PathDIR}  ${baseDIR} ${sampleDIR} ${sampleID}
    # date >> time.txt
 done
-# �Աȶ��ϵĲ�ԭ΢������Rͳ�ƱȶԵ���Ŀ��΢��������
+# 对比对上的病原微生物用R统计比对的数目和微生物物种
 ####### Trimmomatic / BWA / samtools / bedtools  #######
 
 

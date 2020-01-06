@@ -4,10 +4,10 @@
     --color: hsl(30, 100%, 55%);
     --color-subtle: hsl(30, 100%, 55%);
     --color-strong: hsl(30, 100%, 75%);
-    --color-link: hsl(30, 100%, 22%);
+    --color-link: hsl(30, 100%, 80%);
     --color-border: hsl(30, 100%, 55%);
     --color-bg: hsl(0, 0%, 20%);
-    --color-accent: hsl(330, 50%, 50%);
+    --color-accent: hsl(30, 90%, 50%);
     ;
     /* Fallback */
 }
@@ -20,23 +20,23 @@
 }
 
 .u-category-windows {
-    --color-accent: hsl(116, 30%, 36%);
+    --color-accent: hsl(30, 100%, 55%);
 }
 
 .u-category-menu {
-    --color-accent: hsl(194, 60%, 36%);
+    --color-accent: hsl(30, 100%, 55%);
 }
 
 .u-category-native-ui {
-    --color-accent: hsl(222, 53%, 50%);
+    --color-accent: hsl(30, 100%, 55%);
 }
 
 .u-category-communication {
-    --color-accent: hsl(285, 47%, 46%);
+    --color-accent: hsl(30, 80%, 65%);
 }
 
 .u-category-system {
-    --color-accent: hsl(330, 65%, 48%);
+    --color-accent: hsl(30, 80%, 65%);
 }
 
 .u-category-media {

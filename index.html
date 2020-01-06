@@ -97,56 +97,6 @@
         require('./assets/demo-btns')
         require('./assets/code-blocks')
         require('./assets/normalize-shortcuts')
-
-
-
-        function jobsTest() {
-            let ramboName = (+new Date).toString(36)
-            addJobInfoPanel(ramboName)
-        }
-        //引用模板
-        function importJobInfoTemplate() {
-            let template = document.getElementsByClassName("jobstemplate")
-            let clone = template[0].children[0].cloneNode(true)
-            setTTTime(clone)
-            let workspace = document.getElementsByClassName('jobs-workspace-wrapper')
-            workspace[0].appendChild(clone)
-        }
-        //获取所有的panel
-        function getAllJobInfoPanel() {
-            let jobs = document.getElementsByClassName('jobs-workspace-wrapper')[0].getElementsByClassName("taskpanel");
-            return jobs;
-        }
-        //获取指定name的panel
-        function getJobInfoPanelByJobName(jobName) {
-            let job = document.getElementById("taskpanel" + jobName);
-            return job;
-        }
-        //创建一个工作面板
-        function addJobInfoPanel(jobName) {
-            let template = document.getElementsByClassName("jobstemplate");
-            let clone = template[0].children[0].cloneNode(true);
-            clone.setAttribute("id", "taskpanel" + jobName);
-
-            setCloneDomContent(clone, "task-name", "taskname" + jobName, jobName);
-            setCloneDomContent(clone, "task-operation", "taskoperation" + jobName, "准备完毕");
-            setCloneDomContent(clone, "task-status", "taskstatus" + jobName, "准备");
-            setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G");
-            let btnOperation = clone.getElementsByClassName("job-operation")[0];
-            btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')");
-            let btnSelectScript = clone.getElementsByClassName("select-script")[0];
-            btnSelectScript.setAttribute("onclick", "selectscriptonclick('" + jobName + "')");
-            let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0];
-            controlpanel.setAttribute("id", "controlpanel" + jobName);
-            let taskinfopanel = clone.getElementsByClassName("taskinfopanel")[0];
-            taskinfopanel.setAttribute("id", "taskinfopanel" + jobName);
-            let taskhr = clone.getElementsByClassName("task-hr")[0];
-            taskhr.setAttribute("id", "taskhr" + jobName);
-            setJITTime(clone);
-            setJTTTime(clone);
-            document.getElementsByClassName('jobs-workspace-wrapper')[0].appendChild(clone);
-        }
-
         function setCloneDomContent(cloneNode, className, domId, content) {
             let target = cloneNode.getElementsByClassName(className)[0];
             let dom = document.createElement('em');
@@ -158,28 +108,15 @@
             }
             target.appendChild(dom);
         }
-
+        
         function setDomContent(domId, content) {
             var dom = document.getElementById(domId);
             dom.innerHTML = content;
         }
-
-        function setJTTTime(jobInfoNode) {
-            let tt = jobInfoNode.getElementsByClassName("task-runtime")[0];
-            let dom = document.createElement('em');
-            //dom.className='book';
-            dom.innerHTML = CurentTime();
-            tt.appendChild(dom);
+        function getDomContent(domId){
+            var dom = document.getElementById(domId);
+            return dom.innerHTML;
         }
-
-        function setJITTime(jobInfoNode) {
-            let tt = jobInfoNode.getElementsByClassName("task-inputtime")[0];
-            let dom = document.createElement('em');
-            //dom.className='book';
-            dom.innerHTML = CurentTime();
-            tt.appendChild(dom);
-        }
-
         function CurentTime() {
             var now = new Date();
             var year = now.getFullYear(); //年
@@ -187,7 +124,7 @@
             var day = now.getDate(); //日
             var hh = now.getHours(); //时
             var mm = now.getMinutes(); //分
-
+        
             var clock = year + "-";
             if (month < 10)
                 clock += "0";
@@ -202,51 +139,9 @@
             clock += mm;
             return (clock);
         }
-        /* 添加动画用 */
-        function operationonclick(jobName) {
-            var controlpanelID = "controlpanel" + jobName;
-            var controlpanel = document.getElementById(controlpanelID);
-            var taskpanelID = "taskpanel" + jobName;
-            var taskpanel = document.getElementById(taskpanelID);
-            var taskinfopanelID = "taskinfopanel" + jobName;
-            var taskinfopanel = document.getElementById(taskinfopanelID);
-            var taskhrID = "taskhr" + jobName;
-            var taskhr = document.getElementById(taskhrID);
-            //var infopanel = 
-            if (controlpanel.className == "controlpanel-hidden") {
-                //taskpanel.style.height = 350;
-                controlpanel.className = "controlpanel-display";
-                taskinfopanel.classList.add("hidden");
-                taskhr.classList.add("hidden");
-
-            } else {
-                controlpanel.className = "controlpanel-hidden";
-                //taskpanel.style.height = 200;
-                taskinfopanel.classList.remove("hidden");
-                taskhr.classList.remove("hidden");
-            }
-        }
-        /* 显示选择脚本 */
-        function selectscriptonclick(jobName) {
-            var scriptselector = document.getElementsByClassName("jobscripttemplate")[0];
-            scriptselector.classList.remove("hidden");
-            let btnSelectScriptSave = document.getElementsByClassName("jobscriptsave-button")[0];
-            btnSelectScriptSave.setAttribute("onclick", "selectscriptsaveonclick('" + jobName + "')");
-            setCloneDomContent(scriptselector, "script-jobname", "script-jobname", jobName);
-        }
-        /*保存选择脚本，让选择界面消失 */
-        function selectscriptsaveonclick(jobName) {
-            var scriptselector = document.getElementsByClassName("jobscripttemplate")[0];
-            scriptselector.classList.add("hidden");
-            var jobscriptradio = document.getElementsByName("jobscriptradio");
-            for (i = 0; i < jobscriptradio.length; i++) {
-                if (jobscriptradio[i].checked) {
-                    setDomContent("taskoperation" + jobName, jobscriptradio[i].value);
-                }
-            }
 
 
-        }
+
         /* chart的实验*/
         require('./assets/renderer-lib/chart-min');
         require('./assets/renderer-lib/chart-utils');
