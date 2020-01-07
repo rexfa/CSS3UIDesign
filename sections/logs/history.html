@@ -38,7 +38,7 @@
       require('./renderer-process/logs/history')
       const path = require('path');
       const {shell} = require('electron');
-      function addHistoryPanel(jobName, scriptName) {
+      function addHistoryPanel(jobName, scriptName,HFTTime,HTTTime) {
         let template = document.getElementsByClassName("historytemplate");
         let clone = template[0].children[0].cloneNode(true);
         clone.setAttribute("id", "historypanel" + jobName);
@@ -54,8 +54,8 @@
 
         let historyhr = clone.getElementsByClassName("history-hr")[0];
         historyhr.setAttribute("id", "historyhr" + jobName);
-        setHFTTime(clone);
-        setHTTTime(clone);
+        setHFTTime(clone,HFTTime);
+        setHTTTime(clone,HTTTime);
         document.getElementsByClassName('history-workspace-wrapper')[0].appendChild(clone);
       }
       function gethistoryresultonclick(jobName){
@@ -65,25 +65,25 @@
         shell.openItem(__dirname+ '/jobs_results/'+jobName+'.txt');
       }
       
-      function setHFTTime(historyInfoNode) {
+      function setHFTTime(historyInfoNode,HFTTime) {
         let ftt = historyInfoNode.getElementsByClassName("history-finishtime")[0];
         let dom = document.createElement('em');
         //dom.className='book';
-        dom.innerHTML = CurentTime();
+        dom.innerHTML = HFTTime;
         ftt.appendChild(dom);
       }
 
-      function setHTTTime(historyInfoNode) {
+      function setHTTTime(historyInfoNode,HTTTime) {
         let htt = historyInfoNode.getElementsByClassName("history-inputtime")[0];
         let dom = document.createElement('em');
         //dom.className='book';
-        dom.innerHTML = CurentTime();
+        dom.innerHTML = HTTTime;
         htt.appendChild(dom);
       }
-      addHistoryPanel("s70_SpeciesCount","用户脚本A");
-      addHistoryPanel("f72_SpeciesCount","用户脚本B");
-      addHistoryPanel("swz_SpeciesCount","系统脚本A");
-      addHistoryPanel("s12_SpeciesCount","下载脚本B");
+      addHistoryPanel("s70_SpeciesCount","用户脚本A",CurentTimeBias(0,0,-3,0),CurentTimeBias(0,0,-3,-1));
+      addHistoryPanel("f72_SpeciesCount","用户脚本B",CurentTimeBias(0,0,-2,-1),CurentTimeBias(0,0,-2,-2));
+      addHistoryPanel("swz_SpeciesCount","系统脚本A",CurentTimeBias(0,0,-2,-4),CurentTimeBias(0,0,-2,-6));
+      addHistoryPanel("s12_SpeciesCount","下载脚本B",CurentTimeBias(0,0,-1,-2),CurentTimeBias(0,0,-1,-4));
     </script>
 
   </section>

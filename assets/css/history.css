@@ -3,6 +3,14 @@
     visibility: hidden;
     opacity: 0;
 }
+
+.history-workspace-wrapper {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
 .historypanel {
     float: left;
     margin: 1rem;

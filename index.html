@@ -34,7 +34,8 @@
 <body>
     <nav class="nav js-nav">
         <header class="nav-header">
-            <h1 class="nav-title">BIS by <strong>KOMODO</strong></h1><h3>Demo</h3>
+            <h1 class="nav-title">BIS by <strong>KOMODO</strong></h1>
+            <h3>Demo</h3>
             <svg class="nav-header-icon">
                 <use xlink:href="assets/img/dna.svg"></use>
             </svg>
@@ -98,6 +99,7 @@
         require('./assets/demo-btns')
         require('./assets/code-blocks')
         require('./assets/normalize-shortcuts')
+
         function setCloneDomContent(cloneNode, className, domId, content) {
             let target = cloneNode.getElementsByClassName(className)[0];
             let dom = document.createElement('em');
@@ -109,15 +111,17 @@
             }
             target.appendChild(dom);
         }
-        
+
         function setDomContent(domId, content) {
             var dom = document.getElementById(domId);
             dom.innerHTML = content;
         }
-        function getDomContent(domId){
+
+        function getDomContent(domId) {
             var dom = document.getElementById(domId);
             return dom.innerHTML;
         }
+
         function CurentTime() {
             var now = new Date();
             var year = now.getFullYear(); //年
@@ -125,7 +129,30 @@
             var day = now.getDate(); //日
             var hh = now.getHours(); //时
             var mm = now.getMinutes(); //分
-        
+
+            var clock = year + "-";
+            if (month < 10)
+                clock += "0";
+            clock += month + "-";
+            if (day < 10)
+                clock += "0";
+            clock += day + " ";
+            if (hh < 10)
+                clock += "0";
+            clock += hh + ":";
+            if (mm < 10) clock += '0';
+            clock += mm;
+            return (clock);
+        }
+
+        function CurentTimeBias(by, bm, bd, bh) {
+            var now = new Date();
+            var year = now.getFullYear() + by; //年
+            var month = now.getMonth() + 1 + bm; //月
+            var day = now.getDate() + bd; //日
+            var hh = now.getHours() + bh; //时
+            var mm = now.getMinutes(); //分
+
             var clock = year + "-";
             if (month < 10)
                 clock += "0";
@@ -142,11 +169,6 @@
         }
 
 
-
-        /* chart的实验*/
-        require('./assets/renderer-lib/chart-min');
-        require('./assets/renderer-lib/chart-utils');
-        require('./renderer-process/jobs/jobs-status');
 
 
         //测试获取本地工作目录列表
