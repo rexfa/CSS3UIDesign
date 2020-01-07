@@ -1,21 +1,17 @@
-.jobsstatus-canvas{
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-.jobsstatus-workspace-wrapper {
+.service-workspace-wrapper {
     position: relative;
     max-width: 780px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
-.jobsstatus-workspace-panal {
+
+.servicepanel {
     float: left;
     margin: 1rem;
     border: 2px solid #ff8c00;
     padding: 10px 20px;
     background: #333333;
-    width: 100%;
+    width: 600px;
     border-radius: 10px;
     /*text-indent: -5em;*/
     font-family: sans-serif;

@@ -70,13 +70,19 @@ var config = {
 	},
 	options: {
 		responsive: true,
+		legend:{
+			labels: {
+				fontColor: '#ff8c00'
+			}
+		},
 		title: {
 			display: true,
-			text: '本机任务压力状态'
+			text: '本机任务压力状态',
+			fontColor: '#ff8c00'
 		},
 		tooltips: {
 			mode: 'index',
-			intersect: false,
+			intersect: false
 		},
 		hover: {
 			mode: 'nearest',
@@ -87,14 +93,16 @@ var config = {
 				display: true,
 				scaleLabel: {
 					display: true,
-					labelString: '时间'
+					labelString: '时间',
+					fontColor: '#ff8c00'
 				}
 			}],
 			yAxes: [{
 				display: true,
 				scaleLabel: {
 					display: true,
-					labelString: '数据'
+					labelString: '数据',
+					fontColor: '#ff8c00'
 				}
 			}]
 		}

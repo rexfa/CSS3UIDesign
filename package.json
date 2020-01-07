@@ -1,8 +1,8 @@
 {
-    "name": "electron-demo",
-    "productName": "Electron Demo",
-    "version": "0.1.1",
-    "description": "Electron Demo",
+    "name": "komodo-bis-demo",
+    "productName": "Komodo BIS Demo",
+    "version": "0.1.2",
+    "description": "Komodo BIS Demo",
     "main": "main.js",
     "bin": "cli.js",
     "scripts": {
@@ -14,9 +14,9 @@
         "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/dna.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
         "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/dna.ico",
         "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out",
-        "package:sign-exe": "signcode './out/Electron Demos-win32-ia32/Electron Demo.exe' --cert ~/electron-demo.p12 --prompt --name 'Electron Demo' --url 'http://electron.rexfa.cc'",
+        "package:sign-exe": "signcode './out/Komodo BIS Demo-win32-ia32/Komodo BIS Demo.exe' --cert ~/Komodo-BIS-Demo.p12 --prompt --name 'Komodo BIS Demo' --url 'http://electron.rexfa.cc'",
         "package:installer": "node ./script/installer.js",
-        "package:sign-installer": "signcode './out/windows-installer/ElectronDemoSetup.exe' --cert ~/electron-demo.p12 --prompt --name 'Electron Demo' --url 'http://electron.rexfa.cc'",
+        "package:sign-installer": "signcode './out/windows-installer/ElectronDemoSetup.exe' --cert ~/electron-demo.p12 --prompt --name 'Komodo BIS Demo' --url 'http://electron.rexfa.cc'",
         "xpackage:mas": "./script/mas.sh",
         "windows-store": "node ./script/windows-store.js",
         "release": "node ./script/release.js",
@@ -27,6 +27,8 @@
     "repository": "https://github.com/rexfa/CSS3UIDesign",
     "keywords": [
         "Electron",
+        "Komodo",
+        "Bioinformation",
         "Demo"
     ],
     "author": "Rex Zhang",
@@ -60,8 +62,8 @@
         }
     },
     "build": {
-        "productName": "electron-demo",
-        "appId": "cc.rexfa.electron-demo",
+        "productName": "komodo-bis-demo",
+        "appId": "cc.rexfa.komodo-bis-demo",
         "output": "build"
     },
     "mac": {

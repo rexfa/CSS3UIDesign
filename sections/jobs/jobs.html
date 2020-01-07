@@ -47,24 +47,24 @@
       <div class="script-listpanel">脚本列表:
         <ul class="script-listpanelul">
           <li> <label class="script-label">
-              <input class="script-radio" type="radio" name="jobscriptradio" value="数据全覆盖脚本">
-              <span class="script-checkbox script-radioInput"></span>数据全覆盖脚本
+              <input class="script-radio" type="radio" name="jobscriptradio" value="宏基因组脚本">
+              <span class="script-checkbox script-radioInput"></span>宏基因组脚本
             </label></li>
           <li> <label class="script-label">
               <input class="script-radio" type="radio" name="jobscriptradio" value="肠道项目脚本">
               <span class="script-checkbox script-radioInput"></span>肠道项目脚本
             </label></li>
           <li> <label class="script-label">
-              <input class="script-radio" type="radio" name="jobscriptradio" value="分泌物项目脚本">
-              <span class="script-checkbox script-radioInput"></span>分泌物项目脚本
+              <input class="script-radio" type="radio" name="jobscriptradio" value="RNA测序数据">
+              <span class="script-checkbox script-radioInput"></span>RNA测序数据
             </label></li>
           <li> <label class="script-label">
               <input class="script-radio" type="radio" name="jobscriptradio" value="用户自定义脚本">
               <span class="script-checkbox script-radioInput"></span>用户自定义脚本
             </label></li>
           <li> <label class="script-label">
-              <input class="script-radio" type="radio" name="jobscriptradio" value="下载系统脚本">
-              <span class="script-checkbox script-radioInput"></span>下载系统脚本
+              <input class="script-radio" type="radio" name="jobscriptradio" value="人类基因数据">
+              <span class="script-checkbox script-radioInput"></span>人类基因数据
             </label></li>
         </ul>
       </div>
@@ -72,12 +72,12 @@
         <button id="save-script" class="jobscriptsave-button">保存脚本选择</button>
       </div>
     </div>
-    <button id="jobs-test" class="test-button">测试</button>
+    <button id="jobs-test"  style="display: none;" class="test-button">测试</button>
     <button id="btn-getjobsdata" style="display: none;">获取工作文件列表</button>
     <div id="jobs-log"></div>
 
     <script type="text/javascript">
-      /* 添加动画用 */
+      /* 打开和关闭操作面板 */
       function operationonclick(jobName) {
         var controlpanelID = "controlpanel" + jobName;
         var controlpanel = document.getElementById(controlpanelID);
@@ -179,7 +179,8 @@
         //var taskstatusdom = document.getElementById("taskstatus" + jobName);
         //taskstatusdom.innerHTML = "开始";
         setDomContent("taskstatus" + jobName,'0%');
-        setInterval(function (){callSetJobsStatus("taskstatus" + jobName)}, 2000);
+        setInterval(function (){callSetJobsStatus("taskstatus" + jobName)}, 2000);//暂时不结束这个Interval
+        operationonclick(jobName);
       }
       function callSetJobsStatus(taskstatusDOMId){
         let cvalue = parseInt(getDomContent(taskstatusDOMId));
