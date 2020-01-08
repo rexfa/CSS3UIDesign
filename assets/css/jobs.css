@@ -54,13 +54,21 @@
     position: relative;
     border: 0px;
 }
-
+/*job 控制面板*/
 .controlpanel-hidden {
     display: none;
+    position: absolute;
+    z-index: 888;
+    width: 150px;
+    top: -150px;
 }
 
 .controlpanel-display {
-    display: inline;
+    position: absolute;
+    z-index: 888;
+    width: 150px;
+    top: -150px;
+    opacity: 0.9;
 }
 
 .taskinfopanel {

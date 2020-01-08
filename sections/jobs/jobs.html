@@ -30,8 +30,9 @@
         <div class="controlpanel">
           <hr class="task-hr" />
           <button class="job-operation">
-            操作</button><br />
+            操作面板</button><br />
           <div class="controlpanel-hidden">
+            <button class="job-operation-close">隐藏面板</button><br />
             <button class="select-script">选择任务脚本</button><br />
             <button class="priority-start">优先开始</button><br />
             <button class="delayed-task">延迟任务</button><br />
@@ -72,7 +73,7 @@
         <button id="save-script" class="jobscriptsave-button">保存脚本选择</button>
       </div>
     </div>
-    <button id="jobs-test"  style="display: none;" class="test-button">测试</button>
+    <button id="jobs-test" style="display: none;" class="test-button">测试</button>
     <button id="btn-getjobsdata" style="display: none;">获取工作文件列表</button>
     <div id="jobs-log"></div>
 
@@ -91,22 +92,27 @@
         if (controlpanel.className == "controlpanel-hidden") {
           //taskpanel.style.height = 350;
           controlpanel.className = "controlpanel-display";
-          taskinfopanel.classList.add("hidden");
-          taskhr.classList.add("hidden");
+          //taskinfopanel.classList.add("hidden");
+          //taskhr.classList.add("hidden");
 
         } else {
           controlpanel.className = "controlpanel-hidden";
           //taskpanel.style.height = 200;
-          taskinfopanel.classList.remove("hidden");
-          taskhr.classList.remove("hidden");
+          //taskinfopanel.classList.remove("hidden");
+          //taskhr.classList.remove("hidden");
         }
+      }
+      function operationcloseonclick(jobName){
+        var controlpanelID = "controlpanel" + jobName;
+        var controlpanel = document.getElementById(controlpanelID);
+        controlpanel.className = "controlpanel-hidden";
       }
 
       function readJobDataDir() {
         //var path = require('path')
         window.clearInterval(this.CheckDirIntervalID);
         var fs = require('fs');
-        var dataPath = ".\\job_data";
+        var dataPath = __dirname + "/job_data";
         //document.getElementById("jobs-log").innerHTML=dataPath;
         var files = fs.readdirSync(dataPath);
         return files;
@@ -157,8 +163,19 @@
 
       /* 显示选择脚本 */
       function selectscriptonclick(jobName) {
+        var taskpanelID = "taskpanel" + jobName;
+        var taskpanel = document.getElementById(taskpanelID);
+        var topPlus0 = taskpanel.offsetTop;
+        //var topPlus1 = window.pageYOffset;
+        //var topPlus2 = document.documentElement.scrollTop;
+        //var topPlus3 = document.body.scrollTop;
+        //console.log(topPlus0);
+        //console.log(topPlus1);
+        //console.log(topPlus2);
+        //console.log(topPlus3);
         var scriptselector = document.getElementsByClassName("jobscripttemplate")[0];
         scriptselector.classList.remove("hidden");
+        scriptselector.style.top = 100 +topPlus0-30+"px"; //根据按键所在的div位置设定脚本选择的位置
         let btnSelectScriptSave = document.getElementsByClassName("jobscriptsave-button")[0];
         btnSelectScriptSave.setAttribute("onclick", "selectscriptsaveonclick('" + jobName + "')");
         setCloneDomContent(scriptselector, "script-jobname", "script-jobname", jobName);
@@ -180,7 +197,7 @@
         //taskstatusdom.innerHTML = "开始";
         setDomContent("taskstatus" + jobName,'0%');
         setInterval(function (){callSetJobsStatus("taskstatus" + jobName)}, 2000);//暂时不结束这个Interval
-        operationonclick(jobName);
+        operationcloseonclick(jobName);
       }
       function callSetJobsStatus(taskstatusDOMId){
         let cvalue = parseInt(getDomContent(taskstatusDOMId));
@@ -201,6 +218,9 @@
         setCloneDomContent(clone, "task-scale", "taskscale" + jobName, "10G");
         let btnOperation = clone.getElementsByClassName("job-operation")[0];
         btnOperation.setAttribute("onclick", "operationonclick('" + jobName + "')");
+        let btnOperationClose = clone.getElementsByClassName("job-operation-close")[0];
+        btnOperationClose.setAttribute("onclick", "operationcloseonclick('" + jobName + "')");
+
         let btnSelectScript = clone.getElementsByClassName("select-script")[0];
         btnSelectScript.setAttribute("onclick", "selectscriptonclick('" + jobName + "')");
         let btnPriorityStart = clone.getElementsByClassName("priority-start")[0];

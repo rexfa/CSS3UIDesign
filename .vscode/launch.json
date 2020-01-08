@@ -1,45 +1,44 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [              
-      {
-        "name":"Debug Render Procress on chrome",
-        "type": "chrome",
-        "request": "launch",
-        "cwd": "${workspaceFolder}",
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-        "windows": {
-          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-        },
-        "runtimeArgs" : [
-          "${workspaceFolder}/main.js",
-          "--remote-debugging-port=10999"
-        ],
-        "port":10999,
-        "webRoot":"${workspaceFolder}",
-        "timeout":3000000
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [{
+      "name": "Debug Render Procress on chrome",
+      "type": "chrome",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Electron Main",
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-        "program": "${workspaceFolder}/main.js",
-        "protocol": "inspector"
+      "runtimeArgs": [
+        "${workspaceFolder}/main.js",
+        "--remote-debugging-port=10999"
+      ],
+      "port": 10999,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 3000000
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Electron Main",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "program": "${workspaceFolder}/main.js",
+      "protocol": "inspector"
+    },
+    {
+      "name": "Debug Main Process",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
-        {
-            "name": "Debug Main Process",
-            "type": "node",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-            "windows": {
-              "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-            },
-            "args" : ["."],
-            "outputCapture": "std"
-          }
-    ]
+      "args": ["."],
+      "outputCapture": "std"
+    }
+  ]
 }
