@@ -35,11 +35,15 @@
           <div>型号:<em class="cpucore-model"></em></div>
           <div>频率:<em class="cpucore-rate"></em></div>
           <div>使用率：<em class="cpucore-userate"></em></div>
+          <canvas class="appsysCPUInfo-canvas" id="appsysCPUInfo-chart-canvas"></canvas>
       </div>
     </div>
 
 
     <script type="text/javascript">
+      require('./assets/renderer-lib/chart-min');
+      require('./assets/renderer-lib/chart-utils');
+      require('./renderer-process/system/app-sys-information');
       const os = require('os');
       function setPFInfo(domId,content){
         var dom = document.getElementById(domId);
