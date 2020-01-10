@@ -43,7 +43,7 @@
     <script type="text/javascript">
       require('./assets/renderer-lib/chart-min');
       require('./assets/renderer-lib/chart-utils');
-      require('./renderer-process/system/app-sys-information');
+      
       const os = require('os');
       function setPFInfo(domId,content){
         var dom = document.getElementById(domId);
@@ -143,6 +143,7 @@
           console.log(`协议族：${obj.family}`);
         });
       }
+      require('./renderer-process/system/app-sys-information');
     </script>
 
   </section>
