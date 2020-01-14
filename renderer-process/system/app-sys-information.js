@@ -36,6 +36,10 @@ var cpuinfoconfig = {
                     display: true,
                     labelString: '使用率',
                     fontColor: '#ff8c00'
+                },
+                ticks:{
+                    min: 0,
+                    max:100
                 }
             }]
         }
@@ -79,6 +83,10 @@ var meminfoconfig = {
                     display: true,
                     labelString: '使用率',
                     fontColor: '#ff8c00'
+                },
+                ticks:{
+                    min: 0,
+                    max:100
                 }
             }]
         }
@@ -122,14 +130,15 @@ function removeData_appsysCPUInfo() {
     //window.cpuinfoLine.update();
 }
 
-function addData_appsysCPUInfo(cpus) {
+function addData_appsysCPUInfo(cpus,cpuRuler) {
     if (cpuinfoconfig.data.datasets.length > 0) {
         var xdata = ' ';
         cpuinfoconfig.data.labels.push(xdata);
         //console.log(cpus[0].times.idle);
         cpuinfoconfig.data.datasets.forEach((dataset, idx, arr) => {
             var times = cpus[idx].times;
-            var cpudata = `${((1-times.idle/(times.idle+times.user+times.nice+times.sys+times.irq))*100).toFixed(2)}`;
+            var timesRuler = cpuRuler[idx].times;
+            var cpudata = `${((1-(times.idle-timesRuler.idle)/((times.idle-timesRuler.idle)+(times.user-timesRuler.user)+(times.nice-timesRuler.nice)+(times.sys-timesRuler.sys)+(times.irq-timesRuler.irq)))*100).toFixed(2)}`;
 
             dataset.data.push(cpudata);
         });
@@ -137,21 +146,36 @@ function addData_appsysCPUInfo(cpus) {
         //window.cpuinfoLine.update();
     }
 }
+function addData_appsysCPUInfoZeroData(){
+    if (cpuinfoconfig.data.datasets.length > 0) {
+        var xdata = ' ';
+        cpuinfoconfig.data.labels.push(xdata);
+        //console.log(cpus[0].times.idle);
+        cpuinfoconfig.data.datasets.forEach((dataset, idx, arr) => {
+            dataset.data.push(0);
+        });
+        //window.cpuinfoLine.update();
+    }
+}
 var CpuDataCapacity = 0;
-
+var CpuRuler =[];
 function updatacpuinfoLine() {
     var os = require('os');
-    var cpus = os.cpus();
+    var cpus = os.cpus();    
     //console.log(cpus[0].model);
     if (CpuDataCapacity < 1) {
+        CpuRuler = cpus;
         addDataset_appsysCPUInfo(cpus);
-    }
-    if (CpuDataCapacity > 20) {
+        for(;CpuDataCapacity<20;CpuDataCapacity++)
+        {
+            addData_appsysCPUInfoZeroData();
+        }
+    }else if (CpuDataCapacity >= 20) {
         removeData_appsysCPUInfo();
         CpuDataCapacity--;
+        addData_appsysCPUInfo(cpus,CpuRuler);
+        CpuDataCapacity++;
     }
-    addData_appsysCPUInfo(cpus);
-    CpuDataCapacity++;
     window.cpuinfoLine.update();
 }
 var MemDataCapacity = 0;
@@ -166,9 +190,16 @@ function updatameminfoLine() {
             backgroundColor: '#4dc9f6',
             borderColor: '#4dc9f6',
             data: [],
-            fill: false
+            fill: true
         };
         meminfoconfig.data.datasets.push(newDataset);
+        for(;MemDataCapacity<20;MemDataCapacity++)
+        {
+            meminfoconfig.data.labels.push(' ');
+            meminfoconfig.data.datasets.forEach((dataset, idx, arr) => {
+                dataset.data.push(0);
+            });
+        }
         window.meminfoLine.update();
     }
     if (MemDataCapacity > 20) {
@@ -179,12 +210,8 @@ function updatameminfoLine() {
         MemDataCapacity--;
     }
     meminfoconfig.data.labels.push(' ');
-    //console.log(freeMem);
-    //console.log(totalMem);
     meminfoconfig.data.datasets.forEach((dataset, idx, arr) => {
-
-        var memdata = (freeMem / totalMem).toFixed(2) * 100;
-
+        var memdata = (1-(freeMem / totalMem)).toFixed(2) * 100;
         dataset.data.push(memdata);
     });
     //meminfoconfig.data.datasets[0].push((freeMem / totalMem).toFixed(2) * 100);
