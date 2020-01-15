@@ -37,9 +37,9 @@ var cpuinfoconfig = {
                     labelString: '使用率',
                     fontColor: '#ff8c00'
                 },
-                ticks:{
+                ticks: {
                     min: 0,
-                    max:100
+                    max: 100
                 }
             }]
         }
@@ -84,9 +84,9 @@ var meminfoconfig = {
                     labelString: '使用率',
                     fontColor: '#ff8c00'
                 },
-                ticks:{
+                ticks: {
                     min: 0,
-                    max:100
+                    max: 100
                 }
             }]
         }
@@ -130,7 +130,7 @@ function removeData_appsysCPUInfo() {
     //window.cpuinfoLine.update();
 }
 
-function addData_appsysCPUInfo(cpus,cpuRuler) {
+function addData_appsysCPUInfo(cpus, cpuRuler) {
     if (cpuinfoconfig.data.datasets.length > 0) {
         var xdata = ' ';
         cpuinfoconfig.data.labels.push(xdata);
@@ -146,7 +146,8 @@ function addData_appsysCPUInfo(cpus,cpuRuler) {
         //window.cpuinfoLine.update();
     }
 }
-function addData_appsysCPUInfoZeroData(){
+
+function addData_appsysCPUInfoZeroData() {
     if (cpuinfoconfig.data.datasets.length > 0) {
         var xdata = ' ';
         cpuinfoconfig.data.labels.push(xdata);
@@ -158,22 +159,23 @@ function addData_appsysCPUInfoZeroData(){
     }
 }
 var CpuDataCapacity = 0;
-var CpuRuler =[];
+var CpuRuler = [];
+
 function updatacpuinfoLine() {
     var os = require('os');
-    var cpus = os.cpus();    
+    var cpus = os.cpus();
     //console.log(cpus[0].model);
     if (CpuDataCapacity < 1) {
         CpuRuler = cpus;
         addDataset_appsysCPUInfo(cpus);
-        for(;CpuDataCapacity<20;CpuDataCapacity++)
-        {
+        for (; CpuDataCapacity < 20; CpuDataCapacity++) {
             addData_appsysCPUInfoZeroData();
         }
-    }else if (CpuDataCapacity >= 20) {
+    } else if (CpuDataCapacity >= 20) {
         removeData_appsysCPUInfo();
         CpuDataCapacity--;
-        addData_appsysCPUInfo(cpus,CpuRuler);
+        addData_appsysCPUInfo(cpus, CpuRuler);
+        CpuRuler = cpus; //更新cpu信息标尺
         CpuDataCapacity++;
     }
     window.cpuinfoLine.update();
@@ -193,8 +195,7 @@ function updatameminfoLine() {
             fill: true
         };
         meminfoconfig.data.datasets.push(newDataset);
-        for(;MemDataCapacity<20;MemDataCapacity++)
-        {
+        for (; MemDataCapacity < 20; MemDataCapacity++) {
             meminfoconfig.data.labels.push(' ');
             meminfoconfig.data.datasets.forEach((dataset, idx, arr) => {
                 dataset.data.push(0);
@@ -211,7 +212,7 @@ function updatameminfoLine() {
     }
     meminfoconfig.data.labels.push(' ');
     meminfoconfig.data.datasets.forEach((dataset, idx, arr) => {
-        var memdata = (1-(freeMem / totalMem)).toFixed(2) * 100;
+        var memdata = (1 - (freeMem / totalMem)).toFixed(2) * 100;
         dataset.data.push(memdata);
     });
     //meminfoconfig.data.datasets[0].push((freeMem / totalMem).toFixed(2) * 100);

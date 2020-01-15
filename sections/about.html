@@ -2,8 +2,10 @@
   <div id="about-modal" class="about modal">
     <div class="about-wrapper">
       <header class="about-header">
-        <img class="about-logo" src="assets/img/komodo.png" srcset="assets/img/komodo.png 1x, assets/img/komodo@2x.png 2x"
-          alt="Komodo BIS Demo">
+        <img class="about-logo" src="assets/img/komodo.png"
+          srcset="assets/img/komodo.png 1x, assets/img/komodo@2x.png 2x" alt="Komodo BIS Demo">
+        <img class="about-logo" src="assets/img/device512.png" id="new-dev-window"
+          srcset="assets/img/device512.png 1x, assets/img/device01.png 2x" alt="Komodo BIS Device">
       </header>
       <main class="about-sections">
         <section class="about-section play-along">
@@ -11,7 +13,8 @@
           <p>以核心算法、生物信息数据库和UI技术构建的生物信息系统。</p>
           <h2>关于核心算法</h2>
           <p>核心算法基于<a href="http://www.cpp-home.com/">C++<span class="u-visible-to-screen-reader">(opens in new
-                window)</span></a>开发，数学统计基于<a href="https://www.r-project.org/">R<span class="u-visible-to-screen-reader">(opens
+                window)</span></a>开发，数学统计基于<a href="https://www.r-project.org/">R<span
+                class="u-visible-to-screen-reader">(opens
                 in new window)</span></a>研发完成</p>
           <h2>关于UI</h2>
           <p>UI基于 <a href="https://github.com/electron/electron-quick-start">Electron<span
@@ -27,4 +30,7 @@
       </main>
     </div>
   </div>
+  <script>
+    require('./renderer-process/about/show-device-window')
+  </script>
 </template>
