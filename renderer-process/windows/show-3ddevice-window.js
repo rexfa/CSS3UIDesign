@@ -23,7 +23,7 @@ function show3D() {
         const planeSize = 40;
 
         const loader = new THREE.TextureLoader();
-        const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+        const texture = loader.load('./assets/img/komodo.png');
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.magFilter = THREE.NearestFilter;
@@ -85,7 +85,7 @@ function show3D() {
 
     {
         const gltfLoader = new GLTFLoader();
-        gltfLoader.load('https://threejsfundamentals.org/threejs/resources/models/cartoon_lowpoly_small_city_free_pack/scene.gltf', (gltf) => {
+        gltfLoader.load('./assets/3dmodel/sketch_raw.gltf', (gltf) => {
             const root = gltf.scene;
             scene.add(root);
 
