@@ -10,14 +10,20 @@
         </h1>
         <h3>简单说明设备接口</h3>
       </div>
+      <style>
+          .drawcanvas-workspace-wrapper{
+              width: 400px;
+              height: 320px;
+          }
+      </style>
     </header>
     <div class="workspace">
-      <div id="drawcanvasdiv" >
+      <div class="drawcanvas-workspace-wrapper" id="drawcanvasdiv" >
         <!--
         <canvas id="device3d"></canvas>-->
       </div>
     </div>
-
+<!--
     <script>
       //https://ithanmang.gitee.io/threejs/home/201808/20180829/01-load-gltf-file.html
 
@@ -42,11 +48,13 @@
   
       /* 渲染器 */
       function initRender() {
-  
-          renderer = new THREE.WebGLRenderer({antialias: true});
-          renderer.setSize(window.innerWidth, window.innerHeight);
-          renderer.setClearColor(0x0E3866);
           let cav = document.getElementById("drawcanvasdiv");
+          var width = cav.style.width || cav.clientWidth || cav.offsetWidth || cav.scrollWidth;
+          var height = cav.style.height || cav.clientHeight || cav.offsetHeight || cav.scrollHeight;
+          renderer = new THREE.WebGLRenderer({antialias: true});
+          renderer.setSize(width, height);
+          renderer.setClearColor(0xFF8C00);
+          
           //document.body.appendChild(renderer.domElement);
           cav.appendChild(renderer.domElement);
       }
@@ -166,5 +174,6 @@
       })();
 
       </script>
+    -->
   </section>
 </template>
