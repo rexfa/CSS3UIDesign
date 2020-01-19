@@ -6,7 +6,7 @@
         text-align: center;
         font-size: 40px;
     }
-
+    
     h5 {
         padding: 0;
         margin: 0;
@@ -15,7 +15,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
+    
     #close {
         color: white;
         opacity: 0.7;
@@ -26,13 +26,13 @@
         font-size: 12px;
         text-decoration: none;
     }
-
+    
     .drawcanvas-workspace-wrapper {
         position: absolute;
         top: 50px;
         left: 50px;
-        width: 500px;
-        height: 400px;
+        width: 720px;
+        height: 405px;
     }
 </style>
 
@@ -75,7 +75,7 @@
         //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
         camera = new THREE.PerspectiveCamera(45, drawWidth / drawHeight, 0.1, 10000);
         //相机位置
-        camera.position.set(2, 5, 5);
+        camera.position.set(2, 2, 3);
         //相机目视位置
         camera.lookAt(new THREE.Vector3(1, 10, -1));
 
@@ -97,9 +97,19 @@
 
     /* 灯光 */
     function initLight() {
-
-        scene.add(new THREE.AmbientLight(0xffffff));
-
+        //建立一个聚光灯变量，用来照射物体来产生阴影
+        //建立一个spotLight变量，指定颜色：0xFFFFFF
+        var spotLight = new THREE.SpotLight(0xFFFFFF);
+        //指定spotLight的位置
+        spotLight.position.set(40, 40, 40);
+        //阴影
+        //spotLight.castShadow = true;
+        var spotLight1 = new THREE.SpotLight(0xCCCCCC);
+        //指定spotLight的位置
+        spotLight1.position.set(-20, -10, -40);
+        scene.add(new THREE.AmbientLight(0x888888));
+        scene.add(spotLight);
+        scene.add(spotLight1);
     }
 
     /* 控制器 */
@@ -114,7 +124,7 @@
     /* 调试插件 */
     function initGui() {
 
-        guiControls = new function () {
+        guiControls = new function() {
 
         };
 
@@ -130,18 +140,23 @@
         // 加载 glTF 格式的模型
         let loader = new THREE.GLTFLoader(); /*实例化加载器*/
 
-        loader.load('../../assets/3dmodel/sketch_raw.gltf', function (obj) {
+        loader.load('../../assets/3dmodel/sketch_raw.gltf', function(obj) {
 
+            //var sphereMaterial = new THREE.MeshBasicMaterial({
+            //    color: 0xff0000,
+            //    wireframe: true
+            //});
+            //obj.scene.material = sphereMaterial;
             console.log(obj);
-            obj.scene.position.y = 1;
+            obj.scene.position.y = 0;
             scene.add(obj.scene);
             document.getElementById('loading').style.display = 'none';
 
-        }, function (xhr) {
+        }, function(xhr) {
 
             console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 
-        }, function (error) {
+        }, function(error) {
 
             console.log('load error!' + error.getWebGLErrorMessage());
 
@@ -202,7 +217,7 @@
     }
 
     /* 初始加载 */
-    (function () {
+    (function() {
         console.log("three init start...");
 
         init();
