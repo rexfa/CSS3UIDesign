@@ -6,7 +6,7 @@
         text-align: center;
         font-size: 40px;
     }
-    
+
     h5 {
         padding: 0;
         margin: 0;
@@ -15,7 +15,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    
+
     #close {
         color: white;
         opacity: 0.7;
@@ -26,7 +26,8 @@
         font-size: 12px;
         text-decoration: none;
     }
-    .drawcanvas-workspace-wrapper{
+
+    .drawcanvas-workspace-wrapper {
         position: absolute;
         top: 50px;
         left: 50px;
@@ -36,10 +37,10 @@
 </style>
 
 <h5>设备3D演示</h5>
-<div class="drawcanvas-workspace-wrapper" id="drawcanvasdiv" >
+<div class="drawcanvas-workspace-wrapper" id="drawcanvasdiv">
     <!--
     <canvas id="device3d"></canvas>-->
-  </div>
+</div>
 <div>
     <a id="close" href="javascript:window.close()">Close this Window</a>
 </div>
@@ -50,156 +51,163 @@
 <script src="../../assets/renderer-lib/OrbitControls.js"></script>
 <script src="../../assets/renderer-lib/GLTFLoader.js"></script>
 <script>
-     //https://ithanmang.gitee.io/threejs/home/201808/20180829/01-load-gltf-file.html
+    //https://ithanmang.gitee.io/threejs/home/201808/20180829/01-load-gltf-file.html
 
-     let scene, camera, renderer, controls, guiControls;
-     let stats = initStats();
-     let drawWidth,drawHeight;
-     let drawCav;
- 
-     /* 场景 */
-     function initScene() {
- 
-         scene = new THREE.Scene();
-         drawCav = document.getElementById("drawcanvasdiv");
-         drawWidth = drawCav.style.width || drawCav.clientWidth || drawCav.offsetWidth || drawCav.scrollWidth;
-         drawHeight = drawCav.style.height || drawCav.clientHeight || drawCav.offsetHeight || drawCav.scrollHeight;
- 
-     }
- 
-     /* 相机 */
-     function initCamera() {
- 
-         //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
-         camera = new THREE.PerspectiveCamera(45, drawWidth / drawHeight, 0.1, 10000);
-         camera.position.set(2, 5, 5);
-         camera.lookAt(new THREE.Vector3(0, 0, 0));
- 
-     }
- 
-     /* 渲染器 */
-     function initRender() {
+    let scene, camera, renderer, controls, guiControls;
+    let stats = initStats();
+    let drawWidth, drawHeight;
+    let drawCav;
 
-         renderer = new THREE.WebGLRenderer({antialias: true});
-         //renderer.setSize(window.innerWidth,window.innerWidth);
-         renderer.setSize(drawWidth, drawHeight);
-         renderer.setClearColor(0xFF8C00);
-         
-         //document.body.appendChild(renderer.domElement);
-         drawCav.appendChild(renderer.domElement);
-     }
- 
-     /* 灯光 */
-     function initLight() {
- 
-         scene.add(new THREE.AmbientLight(0xffffff));
- 
-     }
- 
-     /* 控制器 */
-     function initControls() {
- 
-         controls = new THREE.OrbitControls(camera, renderer.domElement);
- 
-         /* 属性参数默认 */
- 
-     }
- 
-     /* 调试插件 */
-     function initGui() {
- 
-         guiControls = new function () {
- 
-         };
- 
-         let controls = new dat.GUI({width: 200});
- 
-     }
- 
-     /* 场景中的内容 */
-     function initContent() {
- 
-         // 加载 glTF 格式的模型
-         let loader = new THREE.GLTFLoader();/*实例化加载器*/
- 
-         loader.load('../../assets/3dmodel/sketch_raw.gltf',function (obj) {
- 
-             console.log(obj);
-             obj.scene.position.y = 1;
-             scene.add(obj.scene);
-             document.getElementById('loading').style.display = 'none';
- 
-         },function (xhr) {
- 
-             console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
- 
-         },function (error) {
- 
-             console.log('load error!'+error.getWebGLErrorMessage());
- 
-         })
- 
-     }
- 
-     /* 性能插件 */
-     function initStats() {
- 
-         let stats = new Stats();
- 
-         document.body.appendChild(stats.domElement);
- 
-         return stats;
- 
-     }
- 
-     /* 窗口变动触发 */
-     function onWindowResize() {
- 
-         camera.aspect = drawWidth / drawHeight;
-         camera.updateProjectionMatrix();
-         renderer.setSize(drawWidth, drawHeight);
- 
-     }
- 
-     /* 数据更新 */
-     function update() {
- 
-         stats.update();
- 
-     }
- 
-     /* 初始化 */
-     function init() {
- 
-         initScene();
-         initCamera();
-         initRender();
-         initLight();
-         initControls();
-         initContent();
-         initGui();
- 
-         /* 监听事件 */
-         window.addEventListener('resize', onWindowResize, false);
- 
-     }
- 
-     /* 循环渲染 */
-     function animate() {
- 
-         requestAnimationFrame(animate);
-         renderer.render(scene, camera);
-         update();
- 
-     }
- 
-     /* 初始加载 */
-     (function () {
-         console.log("three init start...");
- 
-         init();
-         animate();
- 
-         console.log("three init send...");
-     })();
+    /* 场景 */
+    function initScene() {
+
+        scene = new THREE.Scene();
+        drawCav = document.getElementById("drawcanvasdiv");
+        drawWidth = drawCav.style.width || drawCav.clientWidth || drawCav.offsetWidth || drawCav.scrollWidth;
+        drawHeight = drawCav.style.height || drawCav.clientHeight || drawCav.offsetHeight || drawCav.scrollHeight;
+
+    }
+
+    /* 相机 */
+    function initCamera() {
+        //PerspectiveCamera( fov, aspect, near, far )
+        //fov(视场角)、aspect(宽高比)、near(近距剪切)、far(远距剪切)
+        //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+        camera = new THREE.PerspectiveCamera(45, drawWidth / drawHeight, 0.1, 10000);
+        //相机位置
+        camera.position.set(2, 5, 5);
+        //相机目视位置
+        camera.lookAt(new THREE.Vector3(1, 10, -1));
+
+    }
+
+    /* 渲染器 */
+    function initRender() {
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+        //renderer.setSize(window.innerWidth,window.innerWidth);
+        renderer.setSize(drawWidth, drawHeight);
+        renderer.setClearColor(0xFF8C00);
+
+        //document.body.appendChild(renderer.domElement);
+        drawCav.appendChild(renderer.domElement);
+    }
+
+    /* 灯光 */
+    function initLight() {
+
+        scene.add(new THREE.AmbientLight(0xffffff));
+
+    }
+
+    /* 控制器 */
+    function initControls() {
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        /* 属性参数默认 */
+
+    }
+
+    /* 调试插件 */
+    function initGui() {
+
+        guiControls = new function () {
+
+        };
+
+        let controls = new dat.GUI({
+            width: 200
+        });
+
+    }
+
+    /* 场景中的内容 */
+    function initContent() {
+
+        // 加载 glTF 格式的模型
+        let loader = new THREE.GLTFLoader(); /*实例化加载器*/
+
+        loader.load('../../assets/3dmodel/sketch_raw.gltf', function (obj) {
+
+            console.log(obj);
+            obj.scene.position.y = 1;
+            scene.add(obj.scene);
+            document.getElementById('loading').style.display = 'none';
+
+        }, function (xhr) {
+
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+        }, function (error) {
+
+            console.log('load error!' + error.getWebGLErrorMessage());
+
+        })
+
+    }
+
+    /* 性能插件 */
+    function initStats() {
+
+        let stats = new Stats();
+
+        document.body.appendChild(stats.domElement);
+
+        return stats;
+
+    }
+
+    /* 窗口变动触发 */
+    function onWindowResize() {
+
+        camera.aspect = drawWidth / drawHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(drawWidth, drawHeight);
+
+    }
+
+    /* 数据更新 */
+    function update() {
+
+        stats.update();
+
+    }
+
+    /* 初始化 */
+    function init() {
+
+        initScene();
+        initCamera();
+        initRender();
+        initLight();
+        initControls();
+        initContent();
+        initGui();
+
+        /* 监听事件 */
+        window.addEventListener('resize', onWindowResize, false);
+
+    }
+
+    /* 循环渲染 */
+    function animate() {
+
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        update();
+
+    }
+
+    /* 初始加载 */
+    (function () {
+        console.log("three init start...");
+
+        init();
+        animate();
+
+        console.log("three init send...");
+    })();
 </script>
