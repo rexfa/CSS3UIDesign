@@ -90,6 +90,10 @@ footer.about-section {
     text-align: center;
 }
 
+.about-header-text {
+    text-align: center;
+}
+
 .rainbow-button-wrapper {
     --rainbow-button-width: 170px;
     --rainbow-button-height: 50px;

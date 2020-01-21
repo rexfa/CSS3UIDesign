@@ -34,12 +34,27 @@
         width: 720px;
         height: 405px;
     }
+    
+    .showdata-workspace {
+        position: absolute;
+        width: 720px;
+        top: 455px;
+        color: #FF8C00;
+        font-size: medium;
+    }
 </style>
 
 <h5>设备3D演示</h5>
 <div class="drawcanvas-workspace-wrapper" id="drawcanvasdiv">
     <!--
     <canvas id="device3d"></canvas>-->
+</div>
+<div id="showDataDivWorkspace" class="showdata-workspace">
+    <p id="datadiv">
+        设备说明（可旋转）:
+        <p id="data0"></p>
+</div>
+<div id="loading"></div>
 </div>
 <div>
     <a id="close" href="javascript:window.close()">Close this Window</a>
@@ -52,6 +67,9 @@
 <script src="../../assets/renderer-lib/GLTFLoader.js"></script>
 <script>
     //https://ithanmang.gitee.io/threejs/home/201808/20180829/01-load-gltf-file.html
+    //https://www.cnblogs.com/brainworld/p/7698308.html
+    //future
+    //http://stemkoski.github.io/Three.js/Mouse-Click.html
 
     let scene, camera, renderer, controls, guiControls;
     let stats = initStats();
@@ -70,7 +88,8 @@
 
     /* 相机 */
     function initCamera() {
-        //PerspectiveCamera( fov, aspect, near, far )
+        //OrthographicCamera only正交相机
+        //PerspectiveCamera( fov, aspect, near, far )景深相机
         //fov(视场角)、aspect(宽高比)、near(近距剪切)、far(远距剪切)
         //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
         camera = new THREE.PerspectiveCamera(45, drawWidth / drawHeight, 0.1, 10000);
@@ -116,9 +135,24 @@
     function initControls() {
 
         controls = new THREE.OrbitControls(camera, renderer.domElement);
+        //限制最大仰视角和俯视角[0, Math.PI]
+        controls.minPolarAngle = Math.PI * (2 / 5);
+        controls.maxPolarAngle = Math.PI * (3 / 5);
 
-        /* 属性参数默认 */
-
+        //水平方向视角限制[ - Math.PI, Math.PI]
+        controls.minAzimuthAngle = -Math.PI; // radians
+        controls.maxAzimuthAngle = Math.PI; // radians
+        //最大最小相机移动距离( PerspectiveCamera only )[0,Infinity]
+        controls.minDistance = 2;
+        controls.maxDistance = 10;
+        /* 其他属性参数默认 */
+        /*
+        THREE.OrbitControls.prototype.originalhandleMouseWheel = THREE.OrbitControls.prototype.handleMouseWheel;
+        THREE.OrbitControls.prototype.handleMouseWheel = function(event) {
+            this.originalhandleMouseWheel(event);
+            //onMouseAction();
+            console.log("2232");
+        };*/
     }
 
     /* 调试插件 */
@@ -141,10 +175,9 @@
         let loader = new THREE.GLTFLoader(); /*实例化加载器*/
 
         loader.load('../../assets/3dmodel/sketch_raw.gltf', function(obj) {
-
             //var sphereMaterial = new THREE.MeshBasicMaterial({
             //    color: 0xff0000,
-            //    wireframe: true
+            //    wireframe: true   
             //});
             //obj.scene.material = sphereMaterial;
             console.log(obj);
@@ -160,7 +193,7 @@
 
             console.log('load error!' + error.getWebGLErrorMessage());
 
-        })
+        });
 
     }
 
@@ -184,11 +217,29 @@
 
     }
 
+    function showData0(str) {
+        var data0 = document.getElementById("data0");
+        data0.innerText = '' + str;
+    }
+
+    function onWindowClick() {
+        //console.log("33333");
+        let angle = controls.getAzimuthalAngle();
+        //showData0(angle);
+        if (angle > -(Math.PI / 3) && angle < Math.PI / 3) {
+            showData0("前面板包括触摸屏，数据输出口。");
+        } else if ((angle < -(Math.PI / 3) && angle > -(Math.PI * 2 / 3)) || (angle > Math.PI / 3 && angle < Math.PI * 2 / 3)) {
+            showData0("侧面为防尘蒙板。");
+        } else if (angle < -(Math.PI * 2 / 3) || angle > Math.PI * 2 / 3) {
+            showData0("后面板包括散热口，设备外设连接端口，检修连接端口和网络连接端口。");
+        }
+
+
+    }
+
     /* 数据更新 */
     function update() {
-
         stats.update();
-
     }
 
     /* 初始化 */
@@ -204,17 +255,21 @@
 
         /* 监听事件 */
         window.addEventListener('resize', onWindowResize, false);
+        window.addEventListener("click", onWindowClick, false);
+        window.addEventListener("touchend", onWindowClick, false);
+        //window.addEventListener("mo")
+        //drawCav.addEventListener('mousedown', onMouseAction);
 
     }
 
     /* 循环渲染 */
     function animate() {
-
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
         update();
-
     }
+
+
 
     /* 初始加载 */
     (function() {
