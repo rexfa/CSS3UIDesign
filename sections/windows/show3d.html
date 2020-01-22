@@ -31,7 +31,7 @@
         position: absolute;
         top: 50px;
         left: 50px;
-        width: 720px;
+        width: 690px;
         height: 405px;
     }
     
@@ -39,6 +39,15 @@
         position: absolute;
         width: 720px;
         top: 455px;
+        color: #FF8C00;
+        font-size: medium;
+    }
+    
+    .showdata-detail-workspace {
+        position: absolute;
+        width: 80px;
+        top: 100px;
+        left: 750px;
         color: #FF8C00;
         font-size: medium;
     }
@@ -52,10 +61,11 @@
 <div id="showDataDivWorkspace" class="showdata-workspace">
     <p id="datadiv">
         设备说明（可旋转）:
-        <p id="data0"></p>
+        <p id="data0">前面板包括触摸屏，数据输出口。</p>
 </div>
 <div id="loading"></div>
 </div>
+<div class="showdata-detail-workspace" id="showdata-detail"></div>
 <div>
     <a id="close" href="javascript:window.close()">Close this Window</a>
 </div>
@@ -222,16 +232,24 @@
         data0.innerText = '' + str;
     }
 
+    function showdataDetail(str) {
+        var showdatadetail = document.getElementById("showdata-detail");
+        showdatadetail.innerText = str;
+    }
+
     function onWindowClick() {
         //console.log("33333");
         let angle = controls.getAzimuthalAngle();
         //showData0(angle);
         if (angle > -(Math.PI / 3) && angle < Math.PI / 3) {
             showData0("前面板包括触摸屏，数据输出口。");
+            showdataDetail("输入输入口为一个USB3.1和一个TypeC口。");
         } else if ((angle < -(Math.PI / 3) && angle > -(Math.PI * 2 / 3)) || (angle > Math.PI / 3 && angle < Math.PI * 2 / 3)) {
-            showData0("侧面为防尘蒙板。");
+            showData0("");
+            showdataDetail("侧面为一体式，内部包含支撑结构。");
         } else if (angle < -(Math.PI * 2 / 3) || angle > Math.PI * 2 / 3) {
             showData0("后面板包括散热口，设备外设连接端口，检修连接端口和网络连接端口。");
+            showdataDetail("长方形散热口不可遮挡，下右侧包含连接端口，请保持清洁。两个USB3.1接口,一个RJ-45千兆网线接口。");
         }
 
 
