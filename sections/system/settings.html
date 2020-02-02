@@ -60,13 +60,14 @@
           <div class="appsyssettingsline">
             <div class="appsyssettingtitle">核心算法位置:</div>
             <div class="appsyssettingsinput">
-              <input id="corealgorithm" type="url" value="./core/dofinder.sh"/>
+              <input id="corealgorithmurl" type="url" value="./core/dofinder.sh" />
             </div>
           </div>
           <div class="appsyssettingsline">
             <div class="appsyssettingtitle"></div>
             <div class="appsyssettingssave">
-              <div style="width: 200px;"><button class="appsyssettingssave-button" id="save-appsyssettingssave">保存设置</button></div>
+              <div style="width: 200px;"><button class="appsyssettingssave-button"
+                  id="save-appsyssettingssave">保存设置</button></div>
             </div>
           </div>
         </div>
@@ -74,7 +75,21 @@
     </div>
 
     <script type="text/javascript">
+      const settings = require('electron-settings');
+      //https://github.com/nathanbuchar/electron-settings/wiki/FAQs
+      var corealgorithmurlValue = settings.get('corealgorithmurl')
+      if (corealgorithmurlValue) {
+        const corealgorithmurl = document.getElementById('corealgorithmurl');
+        corealgorithmurl.value = corealgorithmurlValue;
+      } else {
 
+      }
+      var appsyssettingssaveBtn = document.getElementById('save-appsyssettingssave');
+      appsyssettingssaveBtn.addEventListener('click', (event) => {
+
+        var corealgorithmurl = document.getElementById('corealgorithmurl');
+        settings.set('corealgorithmurl', corealgorithmurl.value)
+      });
     </script>
 
   </section>

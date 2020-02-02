@@ -1,5 +1,7 @@
 const settings = require('electron-settings')
 
+//for  windows C:\Users\[username]\AppData\Roaming\[app name]
+
 document.body.addEventListener('click', (event) => {
     if (event.target.dataset.section) {
         handleSectionTrigger(event)
