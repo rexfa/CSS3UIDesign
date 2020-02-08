@@ -3,7 +3,7 @@ const path = require('path');
 const exec = require('child_process').exec;
 const spawn = require('child_process').spawn;
 
-
+var childProcess = null;
 var newdevWindowBtn = document.getElementById('new-dev-window');
 newdevWindowBtn.addEventListener('click', (event) => {
     const modalPath = path.join('file://', __dirname, '../../sections/windows/show3d.html');
@@ -85,7 +85,8 @@ function runSpawnPing() {
     }*/
     // 执行命令行，如果命令不需要路径，或就是项目根目录，则不需要cwd参数：
     //增加GBK编码
-    workerProcess = spawn(cmdStr, ['www.163.com'], { cwd: cmdPath, encoding: encodingName });
+    workerProcess = spawn(cmdStr, ['-t', 'www.163.com'], { cwd: cmdPath, encoding: encodingName });
+    //可写流stdin暂不测试  stdio的[0][1][2] 已经由stdin stdout 和stderr 单独实现
     // 打印正常的后台可执行程序输出
     workerProcess.stdout.on('data', function(data) {
         arr.push(data);
@@ -105,8 +106,16 @@ function runSpawnPing() {
         //console.log(iconv.decode(Buffer.concat(arr), encodingName)); // 改成GBK模式 
         console.log('out code：' + code);
     });
+    return workerProcess;
 }
+///加入中断子进程方法
 var logokomodo = document.getElementById('logo-komodo');
 logokomodo.addEventListener('click', (event) => {
-    runSpawnPing();
+    if (childProcess == null) {
+        childProcess = runSpawnPing();
+    } else {
+        console.log(`衍生的子进程的 pid：${childProcess.pid}`);
+        childProcess.kill();
+        childProcess = null;
+    }
 });
