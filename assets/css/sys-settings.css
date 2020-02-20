@@ -1,6 +1,6 @@
 .appsyssettings-workspace-wrapper {
     position: relative;
-    max-width: 780px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -11,7 +11,8 @@
     border: 2px solid #ff8c00;
     padding: 10px 20px;
     background: #333333;
-    width: 600px;
+    width: 85%;
+    min-width: 600px;
     border-radius: 10px;
     /*text-indent: -5em;*/
     font-family: sans-serif;
@@ -22,7 +23,7 @@
     -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
 }
 
-.appsyssettingssline {
+.appsyssettingsline {
     float: left;
     width: 100%;
 }
@@ -161,7 +162,7 @@
 .appsyssettingssave {
     position: relative;
     float: right;
-    right: 20px;
+    right: 200px;
     width: 90px;
     margin: 0;
     -webkit-user-select: none;
