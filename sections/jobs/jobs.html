@@ -27,11 +27,11 @@
           <div>IT：<em class="task-inputtime"></em></div>
           <div>TT：<em class="task-runtime"></em></div>
         </div>
-        <div class="controlpanel">
+        <div class="controlgroup">
           <hr class="task-hr" />
           <button class="job-operation">
             操作面板</button><br />
-          <div class="controlpanel-hidden">
+          <div class="controlpanel hidden ">
             <button class="job-operation-close">隐藏面板</button><br />
             <button class="select-script">选择任务脚本</button><br />
             <button class="priority-start">优先开始</button><br />
@@ -89,23 +89,18 @@
         var taskhrID = "taskhr" + jobName;
         var taskhr = document.getElementById(taskhrID);
         //var infopanel = 
-        if (controlpanel.className == "controlpanel-hidden") {
-          //taskpanel.style.height = 350;
-          controlpanel.className = "controlpanel-display";
-          //taskinfopanel.classList.add("hidden");
-          //taskhr.classList.add("hidden");
+        if (controlpanel.classList.contains("hidden")) {
+
+          controlpanel.classList.remove("hidden");
 
         } else {
-          controlpanel.className = "controlpanel-hidden";
-          //taskpanel.style.height = 200;
-          //taskinfopanel.classList.remove("hidden");
-          //taskhr.classList.remove("hidden");
+          controlpanel.classList.add("hidden");
         }
       }
       function operationcloseonclick(jobName){
         var controlpanelID = "controlpanel" + jobName;
         var controlpanel = document.getElementById(controlpanelID);
-        controlpanel.className = "controlpanel-hidden";
+        controlpanel.classList.add("hidden");
       }
 
       function readJobDataDir() {
@@ -225,7 +220,7 @@
         btnSelectScript.setAttribute("onclick", "selectscriptonclick('" + jobName + "')");
         let btnPriorityStart = clone.getElementsByClassName("priority-start")[0];
         btnPriorityStart.setAttribute("onclick", "prioritystartonclick('" + jobName + "')");
-        let controlpanel = clone.getElementsByClassName("controlpanel-hidden")[0];
+        let controlpanel = clone.getElementsByClassName("controlpanel")[0];
         controlpanel.setAttribute("id", "controlpanel" + jobName);
         let taskinfopanel = clone.getElementsByClassName("taskinfopanel")[0];
         taskinfopanel.setAttribute("id", "taskinfopanel" + jobName);
