@@ -5,4 +5,5 @@ var CheckDirIntervalID = 0;
 this.CheckDirIntervalID = setInterval(callJobsDir, 5000);
 
 var jobstestBtn = document.getElementById('jobs-test');
-jobstestBtn.addEventListener('click', jobsTest);
+//jobstestBtn.addEventListener('click', jobsTest);//测试添加job面板
+jobstestBtn.addEventListener('click', lib_showCPUUsages);
