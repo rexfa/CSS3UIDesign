@@ -45,9 +45,10 @@ function lib_getAllCPUUsages() {
         });
         getNum++;
     }, 1000);
-
 }
 
+window.CpuUsages;
+
 function lib_showCPUUsages() {
-    lib_getAllCPUUsages();
+    console.log('Show CPU Usages: ' + window.CpuUsages);
 }

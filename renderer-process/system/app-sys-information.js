@@ -139,8 +139,8 @@ function addData_appsysCPUInfo(cpus, cpuRuler) {
             var times = cpus[idx].times;
             var timesRuler = cpuRuler[idx].times;
             var cpudata = `${((1-(times.idle-timesRuler.idle)/((times.idle-timesRuler.idle)+(times.user-timesRuler.user)+(times.nice-timesRuler.nice)+(times.sys-timesRuler.sys)+(times.irq-timesRuler.irq)))*100).toFixed(2)}`;
-
             dataset.data.push(cpudata);
+            window.CpuUsages[idx] = cpudata;
         });
 
         //window.cpuinfoLine.update();
@@ -160,11 +160,12 @@ function addData_appsysCPUInfoZeroData() {
 }
 var CpuDataCapacity = 0;
 var CpuRuler = [];
+var CpuUsages = [];
 
 function updatacpuinfoLine() {
     var os = require('os');
     var cpus = os.cpus();
-    //console.log(cpus[0].model);
+    //console.log(cpus[0].model);    
     if (CpuDataCapacity < 1) {
         CpuRuler = cpus;
         addDataset_appsysCPUInfo(cpus);
@@ -224,6 +225,8 @@ var cpuinfointerval = 0;
 var meminfointerval = 0;
 
 window.onload = function() {
+    var cpus = os.cpus();
+    window.CpuUsages = new Array(cpus.length);
     var cpuctx = document.getElementById('appsysCPUInfo-chart-canvas').getContext('2d');
     window.cpuinfoLine = new Chart(cpuctx, cpuinfoconfig);
     cpuinfointerval = this.setInterval(updatacpuinfoLine, 5000);
