@@ -1,3 +1,6 @@
 node_modules
 /out
 /node_modules
+/IOSimulator/obj
+/IOSimulator/.vs
+/IOSimulator/bin
