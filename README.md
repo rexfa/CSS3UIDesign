@@ -19,4 +19,6 @@
  
 重启测试按键，尝试进程管理策略的设计 暂且用个window的全局变量获取cpu负载状态
 
-下一步嵌入一个.net core的模拟工作程序帮助测试，在/IOSimulator
+下一步嵌入一个.net core的模拟工作程序帮助测试
+
+20200.05 在/IOSimulator
