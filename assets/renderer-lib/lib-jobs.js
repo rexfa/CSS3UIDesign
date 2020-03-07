@@ -112,8 +112,16 @@ function selectscriptsaveonclick(jobName) {
 function prioritystartonclick(jobName) {
     //var taskstatusdom = document.getElementById("taskstatus" + jobName);
     //taskstatusdom.innerHTML = "开始";
-    setDomContent("taskstatus" + jobName, '0%');
-    setInterval(function() { callSetJobsStatus("taskstatus" + jobName) }, 2000); //暂时不结束这个Interval
+    //setDomContent("taskstatus" + jobName, '0%');
+    //setInterval(function() { callSetJobsStatus("taskstatus" + jobName) }, 2000); //暂时不结束这个Interval
+
+    const settings = require('electron-settings');
+    var corealgorithmurlValue = settings.get('corealgorithmurl');
+    var corealgorithmcmdValue = settings.get('corealgorithmcmd');
+
+    //lib
+    runSpawnWithPathCmd(corealgorithmurlValue, corealgorithmcmdValue);
+
     operationcloseonclick(jobName);
 }
 

@@ -64,6 +64,12 @@
             </div>
           </div>
           <div class="appsyssettingsline">
+            <div class="appsyssettingtitle">核心算法启动命令:</div>
+            <div class="appsyssettingsinput">
+              <input id="corealgorithmcmd" type="url" value="start.sh" />
+            </div>
+          </div>
+          <div class="appsyssettingsline">
             <div class="appsyssettingtitle"></div>
             <div class="appsyssettingssave">
               <div style="width: 200px;"><button class="appsyssettingssave-button"
@@ -77,18 +83,32 @@
     <script type="text/javascript">
       const settings = require('electron-settings');
       //https://github.com/nathanbuchar/electron-settings/wiki/FAQs
+      //核心算法位置获取
       var corealgorithmurlValue = settings.get('corealgorithmurl')
       if (corealgorithmurlValue) {
         const corealgorithmurl = document.getElementById('corealgorithmurl');
         corealgorithmurl.value = corealgorithmurlValue;
       } else {
-
+        var corealgorithmurl = document.getElementById('corealgorithmurl');
+        settings.set('corealgorithmurl', corealgorithmurl.value)
       }
+      //核心算法启动命令
+      var corealgorithmcmdValue = settings.get('corealgorithmcmd')
+      if (corealgorithmcmdValue) {
+        const corealgorithmcmd = document.getElementById('corealgorithmcmd');
+        corealgorithmcmd.value = corealgorithmcmdValue;
+      } else {
+        var corealgorithmcmd = document.getElementById('corealgorithmcmd');
+        settings.set('corealgorithmcmd', corealgorithmcmd.value)
+      }
+      //保存设置
       var appsyssettingssaveBtn = document.getElementById('save-appsyssettingssave');
       appsyssettingssaveBtn.addEventListener('click', (event) => {
 
         var corealgorithmurl = document.getElementById('corealgorithmurl');
         settings.set('corealgorithmurl', corealgorithmurl.value)
+        var corealgorithmcmd = document.getElementById('corealgorithmcmd');
+        settings.set('corealgorithmcmd', corealgorithmcmd.value)
       });
     </script>
 
