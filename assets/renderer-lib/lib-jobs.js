@@ -120,11 +120,11 @@ function prioritystartonclick(jobName) {
     var corealgorithmcmdValue = settings.get('corealgorithmcmd');
 
     //lib
-    runSpawnWithPathCmd(corealgorithmurlValue, corealgorithmcmdValue);
+    runSpawnWithPathCmd(corealgorithmurlValue, corealgorithmcmdValue, "taskstatus" + jobName);
 
     operationcloseonclick(jobName);
 }
-
+//显示进度
 function callSetJobsStatus(taskstatusDOMId) {
     let cvalue = parseInt(getDomContent(taskstatusDOMId));
     if (cvalue < 100) {

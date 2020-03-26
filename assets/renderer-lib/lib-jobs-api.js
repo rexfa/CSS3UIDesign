@@ -51,7 +51,7 @@ function runSpawn() {
     return workerProcess;
 }
 
-function runSpawnWithPathCmd(cmdPath, cmdStr) {
+function runSpawnWithPathCmd(cmdPath, cmdStr, taskstatusDOMId) {
     let iconv = require('iconv-lite');
     let spawn = require('child_process').spawn;
     //let cmdStr = 'ping';
@@ -88,6 +88,7 @@ function runSpawnWithPathCmd(cmdPath, cmdStr) {
         var arr1 = [];
         arr1.push(data);
         //console.log(" new data");
+        setDomContent(taskstatusDOMId, iconv.decode(Buffer.concat(arr1), encodingName));
         console.log(iconv.decode(Buffer.concat(arr1), encodingName));
     });
     // 打印错误的后台可执行程序输出
